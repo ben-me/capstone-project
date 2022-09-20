@@ -49,6 +49,114 @@ const rooms = [
       },
     ],
   },
+  {
+    id: 3,
+    name: 'Room 3',
+    desks: [
+      {
+        id: 1,
+        name: 'Desk 1',
+        isSelected: false,
+        reservations: [{}],
+      },
+      {
+        id: 2,
+        name: 'Desk 2',
+        isSelected: false,
+        reservations: [{}],
+      },
+    ],
+  },
+  {
+    id: 4,
+    name: 'Room 4',
+    desks: [
+      {
+        id: 1,
+        name: 'Desk 1',
+        isSelected: false,
+        reservations: [{}],
+      },
+      {
+        id: 2,
+        name: 'Desk 2',
+        isSelected: false,
+        reservations: [{}],
+      },
+    ],
+  },
+  {
+    id: 5,
+    name: 'Room 5',
+    desks: [
+      {
+        id: 1,
+        name: 'Desk 1',
+        isSelected: false,
+        reservations: [{}],
+      },
+      {
+        id: 2,
+        name: 'Desk 2',
+        isSelected: false,
+        reservations: [{}],
+      },
+    ],
+  },
+  {
+    id: 6,
+    name: 'Room 6',
+    desks: [
+      {
+        id: 1,
+        name: 'Desk 1',
+        isSelected: false,
+        reservations: [{}],
+      },
+      {
+        id: 2,
+        name: 'Desk 2',
+        isSelected: false,
+        reservations: [{}],
+      },
+    ],
+  },
+  {
+    id: 7,
+    name: 'Room 7',
+    desks: [
+      {
+        id: 1,
+        name: 'Desk 1',
+        isSelected: false,
+        reservations: [{}],
+      },
+      {
+        id: 2,
+        name: 'Desk 2',
+        isSelected: false,
+        reservations: [{}],
+      },
+    ],
+  },
+  {
+    id: 8,
+    name: 'Room 8',
+    desks: [
+      {
+        id: 1,
+        name: 'Desk 1',
+        isSelected: false,
+        reservations: [{}],
+      },
+      {
+        id: 2,
+        name: 'Desk 2',
+        isSelected: false,
+        reservations: [{}],
+      },
+    ],
+  },
 ];
 
 export function getAllRooms() {
