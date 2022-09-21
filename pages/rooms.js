@@ -38,7 +38,6 @@ const RoomList = styled.ul`
   flex-direction: column;
   padding: 0;
   gap: 51px;
-  /* position: absolute; */
   margin: 2.7em auto;
   width: 375px;
   left: 26px;
