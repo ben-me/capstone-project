@@ -2,6 +2,7 @@ import RoomItem from '../components/RoomItem';
 import { getAllRooms } from '../services/roomService';
 import styled from 'styled-components';
 import BackButton from '../components/BackButton';
+import Header from '../components/Header';
 
 export async function getStaticProps() {
   const rooms = await getAllRooms();
@@ -16,8 +17,8 @@ export default function Rooms({ rooms }) {
   return (
     <>
       <BackButton page={'/'} />
+      <Header title={'All Rooms'} />
       <RoomList>
-        <Header>All Rooms</Header>
         {rooms.map((room) => {
           return <RoomItem key={room.id} roomData={room} />;
         })}
@@ -31,13 +32,7 @@ const RoomList = styled.ul`
   flex-direction: column;
   padding: 0;
   gap: 51px;
-  margin: 2.7em auto;
+  margin: 0 auto;
   width: 375px;
   left: 26px;
-`;
-
-const Header = styled.h1`
-  text-align: center;
-  margin-bottom: 0;
-  margin-top: 0;
 `;
