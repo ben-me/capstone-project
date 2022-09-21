@@ -1,6 +1,6 @@
 const rooms = [
   {
-    id: 1,
+    id: '1',
     name: 'Room 1',
     desks: [
       {
@@ -32,7 +32,7 @@ const rooms = [
     ],
   },
   {
-    id: 2,
+    id: '2',
     name: 'Room 2',
     desks: [
       {
@@ -50,7 +50,7 @@ const rooms = [
     ],
   },
   {
-    id: 3,
+    id: '3',
     name: 'Room 3',
     desks: [
       {
@@ -68,7 +68,7 @@ const rooms = [
     ],
   },
   {
-    id: 4,
+    id: '4',
     name: 'Room 4',
     desks: [
       {
@@ -86,7 +86,7 @@ const rooms = [
     ],
   },
   {
-    id: 5,
+    id: '5',
     name: 'Room 5',
     desks: [
       {
@@ -104,7 +104,7 @@ const rooms = [
     ],
   },
   {
-    id: 6,
+    id: '6',
     name: 'Room 6',
     desks: [
       {
@@ -122,7 +122,7 @@ const rooms = [
     ],
   },
   {
-    id: 7,
+    id: '7',
     name: 'Room 7',
     desks: [
       {
@@ -140,7 +140,7 @@ const rooms = [
     ],
   },
   {
-    id: 8,
+    id: '8',
     name: 'Room 8',
     desks: [
       {
@@ -164,5 +164,5 @@ export function getAllRooms() {
 }
 
 export function getRoomById(id) {
-  return rooms.find((room) => room.id === Number(id));
+  return rooms.find((room) => room.id === id);
 }
