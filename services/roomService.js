@@ -162,3 +162,7 @@ const rooms = [
 export function getAllRooms() {
   return rooms;
 }
+
+export function getRoomById(id) {
+  return rooms.find((room) => room.id === Number(id));
+}
