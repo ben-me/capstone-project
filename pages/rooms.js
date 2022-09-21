@@ -15,7 +15,7 @@ export async function getStaticProps() {
 export default function Rooms({ rooms }) {
   return (
     <>
-      <BackButton />
+      <BackButton page={'/'} />
       <RoomList>
         <Header>All Rooms</Header>
         {rooms.map((room) => {

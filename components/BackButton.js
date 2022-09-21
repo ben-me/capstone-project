@@ -3,9 +3,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import backArrow from '../public/backarrow.png';
 
-export default function BackButton() {
+export default function BackButton({ page }) {
   return (
-    <Link href="/" passHref>
+    <Link href={page} passHref>
       <BackAnchor>
         <Image alt="backbutton" src={backArrow} />
       </BackAnchor>
