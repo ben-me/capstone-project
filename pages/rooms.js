@@ -1,9 +1,7 @@
 import RoomItem from '../components/RoomItem';
 import { getAllRooms } from '../services/roomService';
 import styled from 'styled-components';
-import Link from 'next/link';
-import Image from 'next/image';
-import backArrow from '../public/backarrow.png';
+import BackButton from '../components/BackButton';
 
 export async function getStaticProps() {
   const rooms = await getAllRooms();
@@ -17,12 +15,7 @@ export async function getStaticProps() {
 export default function Rooms({ rooms }) {
   return (
     <>
-      <Link href="/" passHref>
-        <BackAnchor>
-          <Image alt="backbutton" src={backArrow} />
-        </BackAnchor>
-      </Link>
-
+      <BackButton />
       <RoomList>
         <Header>All Rooms</Header>
         {rooms.map((room) => {
@@ -47,12 +40,4 @@ const Header = styled.h1`
   text-align: center;
   margin-bottom: 0;
   margin-top: 0;
-`;
-
-const BackAnchor = styled.a`
-  display: inline-block;
-  position: absolute;
-  left: 0px;
-  z-index: 1;
-  top: 20px;
 `;
