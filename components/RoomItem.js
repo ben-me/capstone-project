@@ -4,8 +4,8 @@ import styled from 'styled-components';
 export default function RoomItem({ roomData }) {
   return (
     <RoomListElement>
-      <Link href="" passHref>
-        <RoomAnchor>{roomData.name} </RoomAnchor>
+      <Link href={`/rooms/${roomData.id}`} passHref>
+        <RoomAnchor>{roomData.name}</RoomAnchor>
       </Link>
     </RoomListElement>
   );
