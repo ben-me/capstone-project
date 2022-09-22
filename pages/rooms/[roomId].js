@@ -35,17 +35,19 @@ export default function RoomPage({ roomDetails }) {
       <BackButton page={'/rooms'} />
       <Header title={roomDetails.name} />
       <DeskList>
-        <DeskItem />
+        {roomDetails.desks.map((desk) => (
+          <DeskItem key={desk.id} deskDetails={desk} />
+        ))}
       </DeskList>
     </>
   );
 }
 
 const DeskList = styled.ul`
-  display: flex;
-  flex-direction: column;
+  display: grid;
   padding: 0;
-  gap: 51px;
+  gap: 41px;
+  grid-template-columns: repeat(3, 1fr);
   margin: 2.7em auto;
   width: 375px;
   left: 26px;
