@@ -5,7 +5,7 @@ export default function RoomItem({ roomData }) {
   return (
     <RoomListElement>
       <Link href={`/rooms/${roomData.id}`} passHref>
-        <RoomAnchor>{roomData.name} </RoomAnchor>
+        <RoomAnchor>{roomData.name}</RoomAnchor>
       </Link>
     </RoomListElement>
   );

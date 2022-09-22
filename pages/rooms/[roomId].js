@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import BackButton from '../../components/BackButton';
 import DeskItem from '../../components/DeskItem';
@@ -27,9 +26,6 @@ export async function getStaticProps(context) {
 }
 
 export default function RoomPage({ roomDetails }) {
-  const router = useRouter();
-  const { roomId } = router.query;
-
   return (
     <>
       <BackButton page={'/rooms'} />
