@@ -19,6 +19,7 @@ export default function Calendar({ stateDate, onChangeDate }) {
       calendarStartDay={1}
       withPortal
       minDate={new Date()}
+      popperPlacement="bottom-end"
     />
   );
 }
