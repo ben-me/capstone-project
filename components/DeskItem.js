@@ -9,10 +9,9 @@ const Desk = styled.li`
   justify-content: center;
   align-items: center;
   width: 96px;
-  height: 81px;
-  border: 1px rgba(101, 181, 255, 1) solid;
+  height: 70px;
   border-radius: 7px;
   background-color: #65b5ff;
   box-shadow: 0px 4px 20px rgba(101, 181, 255, 0.4);
-  font-size: 24px;
+  font-size: 22px;
 `;

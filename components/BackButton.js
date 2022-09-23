@@ -18,5 +18,5 @@ const BackAnchor = styled.a`
   position: absolute;
   left: 0px;
   z-index: 1;
-  top: 20px;
+  top: 16px;
 `;

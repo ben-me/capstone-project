@@ -41,10 +41,9 @@ export default function RoomPage({ roomDetails }) {
 
 const DeskList = styled.ul`
   display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+  gap: 1.4em;
+  margin: 0 auto;
   padding: 0;
-  gap: 41px;
-  grid-template-columns: repeat(3, 1fr);
-  margin: 2.7em auto;
-  width: 375px;
-  left: 26px;
 `;

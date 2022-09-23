@@ -12,7 +12,8 @@ export default function RoomItem({ roomData }) {
 }
 
 const RoomListElement = styled.li`
-  width: 375px;
+  width: 300px;
+  margin: 0 auto;
   height: 46.12px;
   background: #65b5ff;
   border-radius: 15px;
@@ -29,7 +30,7 @@ const RoomAnchor = styled.a`
   align-items: center;
   width: 100%;
   height: 100%;
-  border-radius: 15px;
+  border-radius: 7px;
   text-decoration: none;
   color: black;
 `;

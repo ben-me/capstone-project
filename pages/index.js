@@ -1,9 +1,18 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import styled from 'styled-components';
+import Office from '../public/office.jpg';
 
 export default function Home() {
   return (
     <Container>
+      <Image
+        src={Office}
+        alt="background"
+        layout="fill"
+        priority
+        objectFit="cover"
+      />
       <Link href="/rooms" passHref>
         <Anchor>Show all rooms</Anchor>
       </Link>
@@ -12,7 +21,12 @@ export default function Home() {
 }
 
 const Anchor = styled.a`
-  display: flex;
+  position: absolute;
+  bottom: 114px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  z-index: 1;
   justify-content: center;
   align-items: center;
   max-height: 100px;
@@ -20,9 +34,9 @@ const Anchor = styled.a`
   max-width: 310px;
   font-size: xx-large;
   border: 1px rgba(101, 181, 255, 1) solid;
-  border-radius: 15px;
+  border-radius: 7px;
   box-shadow: 0px 4px 4px rgba(101, 181, 255, 0.4);
-  background-color: white;
+  background-color: #65b5ff;
   transition: 0.4s;
   text-decoration: none;
   color: black;
@@ -33,8 +47,9 @@ const Anchor = styled.a`
 `;
 
 const Container = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  /* display: flex; */
+  position: relative;
+  /* align-items: center;
+  justify-content: center; */
   min-height: 100vh;
 `;

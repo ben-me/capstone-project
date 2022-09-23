@@ -5,7 +5,6 @@ export default function Header({ title }) {
 }
 
 const Headline = styled.h1`
-  margin-top: 2.7em;
   text-align: center;
-  margin-bottom: 51px;
+  margin-bottom: 25px;
 `;
