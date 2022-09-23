@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import BackButton from '../../components/BackButton';
+import Calendar from '../../components/Calendar';
 import DeskItem from '../../components/DeskItem';
 import Header from '../../components/Header';
 import { getAllRooms, getRoomById } from '../../services/roomService';
@@ -26,10 +28,17 @@ export async function getStaticProps(context) {
 }
 
 export default function RoomPage({ roomDetails }) {
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  function changeDate(date) {
+    setSelectedDate(date);
+  }
+
   return (
     <>
       <BackButton page={'/rooms'} />
       <Header title={roomDetails.name} />
+      <Calendar onChangeDate={changeDate} stateDate={selectedDate} />
       <DeskList>
         {roomDetails.desks.map((desk) => (
           <DeskItem key={desk.id} deskDetails={desk} />
