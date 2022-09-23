@@ -11,7 +11,7 @@ const Desk = styled.li`
   width: 96px;
   height: 70px;
   border-radius: 7px;
-  background-color: #65b5ff;
+  background-color: var(--primary);
   box-shadow: 0px 4px 20px rgba(101, 181, 255, 0.4);
   font-size: 22px;
 `;

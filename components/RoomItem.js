@@ -15,8 +15,9 @@ const RoomListElement = styled.li`
   width: 300px;
   margin: 0 auto;
   height: 46.12px;
-  background: #65b5ff;
-  border-radius: 15px;
+  background: white;
+  border: 1px solid var(--primary);
+  border-radius: 7px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   list-style: none;
   &:hover {
@@ -31,6 +32,7 @@ const RoomAnchor = styled.a`
   width: 100%;
   height: 100%;
   border-radius: 7px;
+  font-weight: 700;
   text-decoration: none;
-  color: black;
+  color: var(--primary);
 `;
