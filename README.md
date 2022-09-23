@@ -5,6 +5,4 @@ It's easy to use and lightweight web-app that helps you make a desk reservation 
 
 ## Technology
 
----
-
 The App is developed in JSX with the [nextJS](https://nextjs.org/) Framework.<br>Deployment is done with [Vercell](https://vercel.com/).
