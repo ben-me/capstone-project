@@ -18,6 +18,8 @@ export default function Calendar({ stateDate, onChangeDate }) {
       filterDate={excludeWeekend}
       calendarStartDay={1}
       withPortal
+      fixedHeight
+      disabledKeyboardNavigation
       minDate={new Date()}
       popperPlacement="bottom-end"
     />
@@ -35,4 +37,9 @@ const StyledDatePicker = styled(DatePicker)`
   border: 1px solid white;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+
+  .react-datepicker__day--outside-month {
+    color: transparent;
+    pointer-events: none;
+  }
 `;
