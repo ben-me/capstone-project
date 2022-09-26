@@ -47,9 +47,6 @@ const Anchor = styled.a`
 `;
 
 const Container = styled.div`
-  /* display: flex; */
   position: relative;
-  /* align-items: center;
-  justify-content: center; */
   min-height: 100vh;
 `;
