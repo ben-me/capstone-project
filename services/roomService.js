@@ -9,8 +9,29 @@ const rooms = [
         reservations: [
           {
             id: '1',
+            starttime: '08:00',
+            endtime: '10:00',
+            user: 'user1',
+            isPrivate: false,
+          },
+          {
+            id: '2',
+            starttime: '10:00',
+            endtime: '12:00',
+            user: 'user1',
+            isPrivate: false,
+          },
+          {
+            id: '3',
             starttime: '12:00',
             endtime: '14:00',
+            user: 'user1',
+            isPrivate: false,
+          },
+          {
+            id: '4',
+            starttime: '14:00',
+            endtime: '16:00',
             user: 'user1',
             isPrivate: false,
           },

@@ -51,6 +51,11 @@ export default function RoomPage({ roomDetails }) {
     }
   }
 
+  function removeHighlight() {
+    setHighlightedDesk({});
+    setDetailsWindowActive(false);
+  }
+
   return (
     <>
       <BackButton page={'/rooms'} />
@@ -67,7 +72,10 @@ export default function RoomPage({ roomDetails }) {
         ))}
       </DeskList>
       {detailsWindowActive ? (
-        <DeskInfoBox highlightedDesk={highlightedDesk}></DeskInfoBox>
+        <DeskInfoBox
+          highlightedDesk={highlightedDesk}
+          onRemoveHighlight={removeHighlight}
+        ></DeskInfoBox>
       ) : (
         ''
       )}

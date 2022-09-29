@@ -1,15 +1,18 @@
+import Image from 'next/image';
 import styled from 'styled-components';
+import Cross from '../public/cross.svg';
 
-export default function DeskInfoBox({ highlightedDesk }) {
-  console.log(highlightedDesk);
+export default function DeskInfoBox({ highlightedDesk, onRemoveHighlight }) {
   const reservationArray = highlightedDesk.reservations;
-  console.log(reservationArray);
 
   return (
     <>
       {reservationArray.length > 0 ? (
         <Infobox>
           <ReservationHeader>Reservations:</ReservationHeader>
+          <CloseButton onClick={onRemoveHighlight}>
+            <Image alt="" src={Cross}></Image>
+          </CloseButton>
           {reservationArray.map((reservation) => {
             return (
               <li key={reservation.id}>
@@ -38,4 +41,15 @@ const Infobox = styled.ul`
 
 const ReservationHeader = styled.h4`
   margin: 0;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  padding: 0;
+  background: none;
+  border: none;
+  width: 20px;
+  height: 20px;
+  top: 0;
+  right: 5px;
 `;
