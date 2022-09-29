@@ -81,6 +81,7 @@ export default function RoomPage({ roomDetails }) {
       ) : (
         ''
       )}
+      <ReserveButton>Reserve</ReserveButton>
     </>
   );
 }
@@ -89,7 +90,24 @@ const DeskList = styled.ul`
   display: grid;
   grid-template-columns: repeat(3, auto);
   justify-content: center;
-  gap: 1.4em;
+  gap: 1.4rem;
   margin: 0 auto;
   padding: 0;
+`;
+
+const ReserveButton = styled.button`
+  width: 18.75rem;
+  height: 2.5rem;
+  position: fixed;
+  bottom: 1.4rem;
+  left: 50%;
+  transform: translate(-50%);
+  background-color: var(--primary);
+  border-radius: 23px;
+  border: none;
+  color: white;
+  font-size: 1.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
