@@ -37,9 +37,4 @@ const StyledDatePicker = styled(DatePicker)`
   border: 1px solid white;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-
-  .react-datepicker__day--outside-month {
-    color: transparent;
-    pointer-events: none;
-  }
 `;

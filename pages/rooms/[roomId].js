@@ -4,6 +4,7 @@ import BackButton from '../../components/BackButton';
 import Calendar from '../../components/Calendar';
 import DeskItem from '../../components/DeskItem';
 import Header from '../../components/Header';
+import DeskInfoBox from '../../components/DeskInfoBox';
 import { getAllRooms, getRoomById } from '../../services/roomService';
 
 export async function getStaticPaths() {
@@ -29,9 +30,31 @@ export async function getStaticProps(context) {
 
 export default function RoomPage({ roomDetails }) {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [detailsWindowActive, setDetailsWindowActive] = useState(false);
+  const [highlightedDesk, setHighlightedDesk] = useState(null);
 
   function changeDate(date) {
     setSelectedDate(date);
+    removeHighlight();
+  }
+
+  function showDetails(selectedDesk) {
+    if (detailsWindowActive) {
+      if (highlightedDesk?.id === selectedDesk.id) {
+        setDetailsWindowActive(false);
+        setHighlightedDesk(null);
+      } else {
+        setHighlightedDesk(selectedDesk);
+      }
+    } else {
+      setDetailsWindowActive(true);
+      setHighlightedDesk(selectedDesk);
+    }
+  }
+
+  function removeHighlight() {
+    setHighlightedDesk(null);
+    setDetailsWindowActive(false);
   }
 
   return (
@@ -41,9 +64,23 @@ export default function RoomPage({ roomDetails }) {
       <Calendar onChangeDate={changeDate} stateDate={selectedDate} />
       <DeskList>
         {roomDetails.desks.map((desk) => (
-          <DeskItem key={desk.id} deskDetails={desk} />
+          <DeskItem
+            key={desk.id}
+            deskDetails={desk}
+            onShowDetails={showDetails}
+            currentHighlightedDesk={highlightedDesk?.id}
+          />
         ))}
       </DeskList>
+      {detailsWindowActive ? (
+        <DeskInfoBox
+          highlightedDesk={highlightedDesk}
+          onRemoveHighlight={removeHighlight}
+          selectedDate={selectedDate}
+        ></DeskInfoBox>
+      ) : (
+        ''
+      )}
     </>
   );
 }
