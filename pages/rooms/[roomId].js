@@ -29,9 +29,25 @@ export async function getStaticProps(context) {
 
 export default function RoomPage({ roomDetails }) {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [detailsWindowActive, setDetailsWindowActive] = useState(false);
+  const [highlightedDesk, setHighlightedDesk] = useState({});
 
   function changeDate(date) {
     setSelectedDate(date);
+  }
+
+  function showDetails(selectedDesk) {
+    if (detailsWindowActive) {
+      if (highlightedDesk === selectedDesk) {
+        setDetailsWindowActive(false);
+        setHighlightedDesk({});
+      } else {
+        setHighlightedDesk(selectedDesk);
+      }
+    } else {
+      setDetailsWindowActive(true);
+      setHighlightedDesk(selectedDesk);
+    }
   }
 
   return (
@@ -41,7 +57,12 @@ export default function RoomPage({ roomDetails }) {
       <Calendar onChangeDate={changeDate} stateDate={selectedDate} />
       <DeskList>
         {roomDetails.desks.map((desk) => (
-          <DeskItem key={desk.id} deskDetails={desk} />
+          <DeskItem
+            key={desk.id}
+            deskDetails={desk}
+            onShowDetails={showDetails}
+            currentHighlightedDesk={highlightedDesk.id}
+          />
         ))}
       </DeskList>
     </>
