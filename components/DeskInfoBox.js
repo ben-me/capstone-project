@@ -42,10 +42,11 @@ const Infobox = styled.ul`
   width: 350px;
   position: fixed;
   padding-left: 20px;
+  transform: translate(-50%);
   border: 1px solid black;
   border-radius: 7px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  left: 13px;
+  left: 50%;
   bottom: 40px;
 `;
 
