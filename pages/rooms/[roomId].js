@@ -61,11 +61,7 @@ export default function RoomPage({ roomDetails }) {
     <>
       <BackButton page={'/rooms'} />
       <Header title={roomDetails.name} />
-      <Calendar
-        onChangeDate={changeDate}
-        stateDate={selectedDate}
-        onRemoveHighlight={removeHighlight}
-      />
+      <Calendar onChangeDate={changeDate} stateDate={selectedDate} />
       <DeskList>
         {roomDetails.desks.map((desk) => (
           <DeskItem
