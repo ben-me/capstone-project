@@ -41,9 +41,6 @@ const Anchor = styled.a`
   text-decoration: none;
   color: black;
   text-align: center;
-  &:hover {
-    background-color: rgba(101, 181, 255, 1);
-  }
 `;
 
 const Container = styled.div`

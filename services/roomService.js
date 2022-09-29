@@ -6,9 +6,9 @@ const rooms = [
       {
         id: '1',
         name: 'Desk 1',
-        isSelected: false,
         reservations: [
           {
+            id: '1',
             starttime: '12:00',
             endtime: '14:00',
             user: 'user1',
@@ -19,7 +19,6 @@ const rooms = [
       {
         id: '2',
         name: 'Desk 2',
-        isSelected: false,
         reservations: [
           {
             starttime: '15:00',
@@ -32,25 +31,21 @@ const rooms = [
       {
         id: '3',
         name: 'Desk 3',
-        isSelected: false,
         reservations: [{}],
       },
       {
         id: '4',
         name: 'Desk 4',
-        isSelected: false,
         reservations: [{}],
       },
       {
         id: '5',
         name: 'Desk 5',
-        isSelected: false,
         reservations: [{}],
       },
       {
         id: '6',
         name: 'Desk 6',
-        isSelected: false,
         reservations: [{}],
       },
     ],
@@ -62,13 +57,11 @@ const rooms = [
       {
         id: '1',
         name: 'Desk 1',
-        isSelected: false,
         reservations: [{}],
       },
       {
         id: '2',
         name: 'Desk 2',
-        isSelected: false,
         reservations: [{}],
       },
     ],
@@ -80,13 +73,11 @@ const rooms = [
       {
         id: '1',
         name: 'Desk 1',
-        isSelected: false,
         reservations: [{}],
       },
       {
         id: '2',
         name: 'Desk 2',
-        isSelected: false,
         reservations: [{}],
       },
     ],
@@ -98,25 +89,21 @@ const rooms = [
       {
         id: '1',
         name: 'Desk 1',
-        isSelected: false,
         reservations: [{}],
       },
       {
         id: '2',
         name: 'Desk 2',
-        isSelected: false,
         reservations: [{}],
       },
       {
         id: '3',
         name: 'Desk 3',
-        isSelected: false,
         reservations: [{}],
       },
       {
         id: '4',
         name: 'Desk 4',
-        isSelected: false,
         reservations: [{}],
       },
     ],
@@ -128,19 +115,16 @@ const rooms = [
       {
         id: '1',
         name: 'Desk 1',
-        isSelected: false,
         reservations: [{}],
       },
       {
         id: '2',
         name: 'Desk 2',
-        isSelected: false,
         reservations: [{}],
       },
       {
         id: '3',
         name: 'Desk 3',
-        isSelected: false,
         reservations: [{}],
       },
     ],
@@ -152,13 +136,11 @@ const rooms = [
       {
         id: '1',
         name: 'Desk 1',
-        isSelected: false,
         reservations: [{}],
       },
       {
         id: '2',
         name: 'Desk 2',
-        isSelected: false,
         reservations: [{}],
       },
     ],
@@ -170,13 +152,11 @@ const rooms = [
       {
         id: '1',
         name: 'Desk 1',
-        isSelected: false,
         reservations: [{}],
       },
       {
         id: '2',
         name: 'Desk 2',
-        isSelected: false,
         reservations: [{}],
       },
     ],
@@ -188,13 +168,11 @@ const rooms = [
       {
         id: '1',
         name: 'Desk 1',
-        isSelected: false,
         reservations: [{}],
       },
       {
         id: '2',
         name: 'Desk 2',
-        isSelected: false,
         reservations: [{}],
       },
     ],
