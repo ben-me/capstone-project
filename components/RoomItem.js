@@ -12,9 +12,9 @@ export default function RoomItem({ roomData }) {
 }
 
 const RoomListElement = styled.li`
-  width: 300px;
+  width: 18.75rem;
   margin: 0 auto;
-  height: 46.12px;
+  height: 2.875rem;
   background: white;
   border: 1px solid var(--primary);
   border-radius: 7px;

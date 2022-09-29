@@ -22,16 +22,16 @@ export default function Home() {
 
 const Anchor = styled.a`
   position: absolute;
-  bottom: 114px;
+  bottom: 7.125rem;
   margin: 0 auto;
   left: 0;
   right: 0;
   z-index: 1;
   justify-content: center;
   align-items: center;
-  max-height: 100px;
-  padding: 1em;
-  max-width: 310px;
+  max-height: 6.25rem;
+  padding: 1.5rem;
+  max-width: 19.375rem;
   font-size: xx-large;
   border: 1px rgba(101, 181, 255, 1) solid;
   border-radius: 7px;

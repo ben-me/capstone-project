@@ -6,6 +6,6 @@ export default function Header({ title }) {
 
 const Headline = styled.h1`
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 1.5rem;
   font-weight: 400;
 `;

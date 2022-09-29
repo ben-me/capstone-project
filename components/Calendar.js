@@ -30,10 +30,10 @@ const StyledDatePicker = styled(DatePicker)`
   text-align: center;
   width: 35%;
   float: right;
-  font-size: 16px;
+  font-size: 1rem;
   margin-right: 1.3rem;
   margin-bottom: 1rem;
-  padding: 5px;
+  padding: 0.313rem;
   border: 1px solid white;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);

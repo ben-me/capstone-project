@@ -39,15 +39,15 @@ export default function DeskInfoBox({
 }
 
 const Infobox = styled.ul`
-  width: 350px;
+  width: 21.875rem;
   position: fixed;
-  padding-left: 20px;
+  padding-left: 1.25rem;
   transform: translate(-50%);
   border: 1px solid black;
   border-radius: 7px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   left: 50%;
-  bottom: 40px;
+  bottom: 3.75rem;
 `;
 
 const ReservationHeader = styled.h4`
@@ -59,8 +59,8 @@ const CloseButton = styled.button`
   padding: 0;
   background: none;
   border: none;
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
   top: 0;
-  right: 5px;
+  right: 0.313rem;
 `;
