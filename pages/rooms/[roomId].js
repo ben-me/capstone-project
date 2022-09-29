@@ -35,6 +35,7 @@ export default function RoomPage({ roomDetails }) {
 
   function changeDate(date) {
     setSelectedDate(date);
+    removeHighlight();
   }
 
   function showDetails(selectedDesk) {
@@ -60,7 +61,11 @@ export default function RoomPage({ roomDetails }) {
     <>
       <BackButton page={'/rooms'} />
       <Header title={roomDetails.name} />
-      <Calendar onChangeDate={changeDate} stateDate={selectedDate} />
+      <Calendar
+        onChangeDate={changeDate}
+        stateDate={selectedDate}
+        onRemoveHighlight={removeHighlight}
+      />
       <DeskList>
         {roomDetails.desks.map((desk) => (
           <DeskItem
