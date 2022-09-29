@@ -21,6 +21,7 @@ const rooms = [
         name: 'Desk 2',
         reservations: [
           {
+            id: '1',
             starttime: '15:00',
             endtime: '17:00',
             user: 'user2',
@@ -31,22 +32,22 @@ const rooms = [
       {
         id: '3',
         name: 'Desk 3',
-        reservations: [{}],
+        reservations: [],
       },
       {
         id: '4',
         name: 'Desk 4',
-        reservations: [{}],
+        reservations: [],
       },
       {
         id: '5',
         name: 'Desk 5',
-        reservations: [{}],
+        reservations: [],
       },
       {
         id: '6',
         name: 'Desk 6',
-        reservations: [{}],
+        reservations: [],
       },
     ],
   },
@@ -57,12 +58,12 @@ const rooms = [
       {
         id: '1',
         name: 'Desk 1',
-        reservations: [{}],
+        reservations: [],
       },
       {
         id: '2',
         name: 'Desk 2',
-        reservations: [{}],
+        reservations: [],
       },
     ],
   },
@@ -73,12 +74,12 @@ const rooms = [
       {
         id: '1',
         name: 'Desk 1',
-        reservations: [{}],
+        reservations: [],
       },
       {
         id: '2',
         name: 'Desk 2',
-        reservations: [{}],
+        reservations: [],
       },
     ],
   },
@@ -89,22 +90,22 @@ const rooms = [
       {
         id: '1',
         name: 'Desk 1',
-        reservations: [{}],
+        reservations: [],
       },
       {
         id: '2',
         name: 'Desk 2',
-        reservations: [{}],
+        reservations: [],
       },
       {
         id: '3',
         name: 'Desk 3',
-        reservations: [{}],
+        reservations: [],
       },
       {
         id: '4',
         name: 'Desk 4',
-        reservations: [{}],
+        reservations: [],
       },
     ],
   },
@@ -115,17 +116,17 @@ const rooms = [
       {
         id: '1',
         name: 'Desk 1',
-        reservations: [{}],
+        reservations: [],
       },
       {
         id: '2',
         name: 'Desk 2',
-        reservations: [{}],
+        reservations: [],
       },
       {
         id: '3',
         name: 'Desk 3',
-        reservations: [{}],
+        reservations: [],
       },
     ],
   },
@@ -136,12 +137,12 @@ const rooms = [
       {
         id: '1',
         name: 'Desk 1',
-        reservations: [{}],
+        reservations: [],
       },
       {
         id: '2',
         name: 'Desk 2',
-        reservations: [{}],
+        reservations: [],
       },
     ],
   },
@@ -152,12 +153,12 @@ const rooms = [
       {
         id: '1',
         name: 'Desk 1',
-        reservations: [{}],
+        reservations: [],
       },
       {
         id: '2',
         name: 'Desk 2',
-        reservations: [{}],
+        reservations: [],
       },
     ],
   },
@@ -168,12 +169,12 @@ const rooms = [
       {
         id: '1',
         name: 'Desk 1',
-        reservations: [{}],
+        reservations: [],
       },
       {
         id: '2',
         name: 'Desk 2',
-        reservations: [{}],
+        reservations: [],
       },
     ],
   },

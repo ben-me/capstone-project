@@ -4,6 +4,7 @@ import BackButton from '../../components/BackButton';
 import Calendar from '../../components/Calendar';
 import DeskItem from '../../components/DeskItem';
 import Header from '../../components/Header';
+import DeskInfoBox from '../../components/DeskInfoBox';
 import { getAllRooms, getRoomById } from '../../services/roomService';
 
 export async function getStaticPaths() {
@@ -65,6 +66,11 @@ export default function RoomPage({ roomDetails }) {
           />
         ))}
       </DeskList>
+      {detailsWindowActive ? (
+        <DeskInfoBox highlightedDesk={highlightedDesk}></DeskInfoBox>
+      ) : (
+        ''
+      )}
     </>
   );
 }
