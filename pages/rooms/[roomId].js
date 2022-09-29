@@ -75,6 +75,7 @@ export default function RoomPage({ roomDetails }) {
         <DeskInfoBox
           highlightedDesk={highlightedDesk}
           onRemoveHighlight={removeHighlight}
+          selectedDate={selectedDate}
         ></DeskInfoBox>
       ) : (
         ''

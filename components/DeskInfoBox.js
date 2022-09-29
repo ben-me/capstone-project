@@ -2,8 +2,18 @@ import Image from 'next/image';
 import styled from 'styled-components';
 import Cross from '../public/cross.svg';
 
-export default function DeskInfoBox({ highlightedDesk, onRemoveHighlight }) {
-  const reservationArray = highlightedDesk.reservations;
+export default function DeskInfoBox({
+  highlightedDesk,
+  onRemoveHighlight,
+  selectedDate,
+}) {
+  const reservationArray = highlightedDesk.reservations.filter(
+    (reservation) => {
+      if (selectedDate.toISOString().substring(0, 10) === reservation.date) {
+        return reservation;
+      }
+    }
+  );
 
   return (
     <>
