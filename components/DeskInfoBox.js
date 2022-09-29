@@ -7,7 +7,7 @@ export default function DeskInfoBox({
   onRemoveHighlight,
   selectedDate,
 }) {
-  const reservationArray = highlightedDesk.reservations.filter(
+  const filteredReservations = highlightedDesk.reservations.filter(
     (reservation) => {
       if (selectedDate.toISOString().substring(0, 10) === reservation.date) {
         return reservation;
@@ -17,13 +17,13 @@ export default function DeskInfoBox({
 
   return (
     <>
-      {reservationArray.length > 0 ? (
+      {filteredReservations.length > 0 ? (
         <Infobox>
           <ReservationHeader>Reservations:</ReservationHeader>
           <CloseButton onClick={onRemoveHighlight}>
             <Image alt="" src={Cross}></Image>
           </CloseButton>
-          {reservationArray.map((reservation) => {
+          {filteredReservations.map((reservation) => {
             return (
               <li key={reservation.id}>
                 From {reservation.starttime} to {reservation.endtime}
