@@ -70,7 +70,7 @@ export default function RoomPage({ roomDetails }) {
     <>
       <SWRConfig value={{ fallback: roomDetails }}>
         <BackButton page={'/rooms'} />
-        <Header title={data.name} />
+        <Header title={roomDetails.name} />
         <Calendar onChangeDate={changeDate} stateDate={selectedDate} />
         <DeskList>
           {data.desks.map((desk) => (
