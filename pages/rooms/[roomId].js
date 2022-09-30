@@ -33,7 +33,7 @@ export async function getStaticProps(context) {
 const fetcher = (id) => getRoomById(id);
 
 export default function RoomPage({ roomDetails }) {
-  const { data, error } = useSWR(id ? roomDetails.id : null, fetcher);
+  const { data, error } = useSWR(roomDetails, fetcher);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [detailsWindowActive, setDetailsWindowActive] = useState(false);
   const [highlightedDesk, setHighlightedDesk] = useState(null);
@@ -73,7 +73,7 @@ export default function RoomPage({ roomDetails }) {
         <Header title={roomDetails.name} />
         <Calendar onChangeDate={changeDate} stateDate={selectedDate} />
         <DeskList>
-          {data.desks.map((desk) => (
+          {roomDetails.desks.map((desk) => (
             <DeskItem
               key={desk.id}
               deskDetails={desk}
