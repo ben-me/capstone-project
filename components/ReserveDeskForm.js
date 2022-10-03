@@ -19,12 +19,11 @@ export default function ReserveDeskForm({
     const form = event.target;
     const inputStartTime = form.starttime.value;
     const inputEndTime = form.endtime.value;
-    const inputDate = form.date.value;
 
     const newReservation = {
       starttime: inputStartTime,
       endtime: inputEndTime,
-      date: inputDate,
+      date: selectedDate.toISOString().substring(0, 10),
       user: 'user1',
       isPrivate: false,
     };
@@ -39,15 +38,15 @@ export default function ReserveDeskForm({
       <input type="time" id="starttime" name="starttime" required />
       <label htmlFor="endtime">End Time:</label>
       <input type="time" id="endtime" name="endtime" required />
-      <label htmlFor="date">Date:</label>
-      <input
+      {/* <label htmlFor="date">Date:</label> */}
+      {/* <input
         min={today}
         type="date"
         id="date"
         name="date"
         required
         defaultValue={selectedDate.toISOString().substring(0, 10)}
-      />
+      /> */}
       <Cancelbutton type="button" onClick={handleClick}>
         Cancel
       </Cancelbutton>

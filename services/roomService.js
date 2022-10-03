@@ -228,8 +228,6 @@ export function addNewReservation(roomID, deskID, newReservation) {
   const overlappingReservations = reservationDates.filter((reservation) => {
     const currentResStart = getTimeFromString(reservation.starttime);
     const currentResEnd = getTimeFromString(reservation.endtime);
-    console.log(currentResStart);
-    console.log(currentResEnd);
     if (
       (currentResStart < newResStart && newResStart < currentResEnd) ||
       (currentResStart < newResEnd && newResEnd < currentResEnd) ||
@@ -240,7 +238,7 @@ export function addNewReservation(roomID, deskID, newReservation) {
     }
   });
 
-  if (overlappingReservations.length > 0) {
+  if (overlappingReservations.length > 0 || newResEnd < newResStart) {
     alert('Invalid Time');
   } else {
     singleDesk.reservations.push({ id: nanoid(), ...newReservation });
