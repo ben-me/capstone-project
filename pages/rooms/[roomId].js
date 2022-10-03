@@ -99,18 +99,17 @@ export default function RoomPage({ roomDetails }) {
               selectedDate={selectedDate}
             />
           ) : (
-            ''
+            <ReserveButton
+              type="button"
+              onClick={() => {
+                if (highlightedDesk && detailsWindowActive) {
+                  setReserveWindowActive(true);
+                }
+              }}
+            >
+              Reserve
+            </ReserveButton>
           )}
-          <ReserveButton
-            type="button"
-            onClick={() => {
-              if (highlightedDesk && detailsWindowActive) {
-                setReserveWindowActive(true);
-              }
-            }}
-          >
-            Reserve
-          </ReserveButton>
         </BoxContainer>
       </SWRConfig>
     </>
@@ -130,6 +129,7 @@ const ReserveButton = styled.button`
   height: 2.5rem;
   width: 100%;
   background-color: var(--primary);
+  box-shadow: 0px 4px 4px var(--primary);
   border-radius: 23px;
   border: none;
   color: white;

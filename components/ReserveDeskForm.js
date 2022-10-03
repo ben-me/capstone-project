@@ -7,6 +7,8 @@ export default function ReserveDeskForm({
   selectedDate,
   selectedRoom,
 }) {
+  const today = new Date().toISOString().split('T')[0];
+
   function handleClick(event) {
     event.preventDefault();
     reserveWindowControl(false);
@@ -39,6 +41,7 @@ export default function ReserveDeskForm({
       <input type="time" id="endtime" name="endtime" required />
       <label htmlFor="date">Date:</label>
       <input
+        min={today}
         type="date"
         id="date"
         name="date"
@@ -54,13 +57,14 @@ export default function ReserveDeskForm({
 }
 
 const StyledForm = styled.form`
-  display: grid;
   width: 100%;
+  display: grid;
   grid-template-columns: 7rem auto;
-  background-color: white;
+  background-color: rgba(101, 181, 255, 0.8);
   border-radius: 22px;
   padding: 1rem;
   gap: 0.2rem 1rem;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
 const ReserveHeader = styled.h3`
