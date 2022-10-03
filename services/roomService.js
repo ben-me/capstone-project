@@ -216,73 +216,39 @@ export function getRoomById(id) {
   return rooms.find((room) => room.id === id);
 }
 
-export function addNewReservation(roomID, deskID, reservation) {
+export function addNewReservation(roomID, deskID, newReservation) {
   const singleRoom = rooms.find((room) => room.id === roomID);
   const singleDesk = singleRoom.desks.find((desk) => desk.id === deskID);
-  console.log(singleDesk);
-
-  singleDesk.reservations.push({ id: nanoid(), ...reservation });
-  console.log(singleDesk.reservations);
-  // if (calculateBlockedTimes(singleDesk, reservation)) {
-  //   alert('Invalid reservation time');
-  // } else {
-
-  // }
-}
-
-function calculateBlockedTimes(desk, newReservation) {
-  const dateSpecifcReservations = desk.reservations.filter(
+  const reservationDates = singleDesk.reservations.filter(
     (reservation) => reservation.date === newReservation.date
   );
-  if (dateSpecifcReservations.length > 0) {
-    const overLappingReservations = dateSpecifcReservations?.filter(
-      (reservation) => {
-        let reservationTimeStart = reservation.starttime.split(':');
-        reservationTimeStart =
-          reservationTimeStart[0] * 60 + reservationTimeStart[1];
-        let reservationTimeEnd = reservation.endtime.split(':');
-        reservationTimeEnd = reservationTimeEnd[0] * 60 + reservationTimeEnd[1];
+  const newResStart = getTimeFromString(newReservation.starttime);
+  const newResEnd = getTimeFromString(newReservation.endtime);
 
-        let newReservationStart = newReservation.starttime.split(':');
-        newReservationStart = newReservation[0] * 60 + newReservationStart[1];
-        let newReservationEnd = newReservation.endtime.split(':');
-        newReservationEnd = newReservationEnd[0] * 60 + newReservationEnd[1];
-
-        if (
-          (reservationTimeStart <= newReservationStart &&
-            newReservationStart <= reservationTimeEnd) ||
-          (reservationTimeStart <= newReservationEnd &&
-            newReservationEnd <= reservationTimeEnd)
-        ) {
-          return reservation;
-        } else {
-          return;
-        }
-      }
-    );
-    if (overLappingReservations.length > 0) {
-      return true;
-    } else {
-      return false;
+  const overlappingReservations = reservationDates.filter((reservation) => {
+    const currentResStart = getTimeFromString(reservation.starttime);
+    const currentResEnd = getTimeFromString(reservation.endtime);
+    console.log(currentResStart);
+    console.log(currentResEnd);
+    if (
+      (currentResStart < newResStart && newResStart < currentResEnd) ||
+      (currentResStart < newResEnd && newResEnd < currentResEnd) ||
+      (currentResStart === newResStart && currentResEnd === newResEnd) ||
+      (newResStart < currentResStart && newResEnd > currentResEnd)
+    ) {
+      return reservation;
     }
+  });
+
+  if (overlappingReservations.length > 0) {
+    alert('Invalid Time');
+  } else {
+    singleDesk.reservations.push({ id: nanoid(), ...newReservation });
   }
 }
 
-// const reservationDate = reservation.date.split('-');
-
-// const startDate = new Date(
-//   reservationDate[0],
-//   reservationDate[1],
-//   reservationDate[2],
-//   reservationTimeStart[0],
-//   reservationTimeStart[1],
-//   0
-// );
-
-// const endDate = new Date(
-//   reservationDate[0],
-//   reservationDate[1],
-//   reservationDate[2],
-//   reservationTimeEnd[0],
-//   reservationTimeEnd[1],
-//   0
+function getTimeFromString(string) {
+  const splitTime = string.split(':');
+  const timeInMinutes = splitTime[0] * 60 + splitTime[1];
+  return timeInMinutes;
+}
