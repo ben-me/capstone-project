@@ -14,9 +14,6 @@ export default function DeskInfoBox({
       }
     }
   );
-  filteredReservations.sort((a, b) => {
-    return a.starttime - b.starttime;
-  });
 
   return (
     <>
