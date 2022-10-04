@@ -238,8 +238,10 @@ export function addNewReservation(roomID, deskID, newReservation) {
     }
   });
 
-  if (overlappingReservations.length > 0 || newResEnd < newResStart) {
-    alert('Invalid Time');
+  if (overlappingReservations.length > 0 || newResEnd <= newResStart) {
+    alert(
+      "Invalid entry. Only reserve free timeslots between 06:00 and 20:00 o'clock"
+    );
   } else {
     singleDesk.reservations.push({ id: nanoid(), ...newReservation });
   }
