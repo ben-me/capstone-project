@@ -7,8 +7,6 @@ export default function ReserveDeskForm({
   selectedDate,
   selectedRoom,
 }) {
-  const today = new Date().toISOString().split('T')[0];
-
   function handleClick(event) {
     event.preventDefault();
     reserveWindowControl(false);
@@ -19,13 +17,14 @@ export default function ReserveDeskForm({
     const form = event.target;
     const inputStartTime = form.starttime.value;
     const inputEndTime = form.endtime.value;
+    const privateReservation = form.private.checked;
 
     const newReservation = {
       starttime: inputStartTime,
       endtime: inputEndTime,
       date: selectedDate.toISOString().substring(0, 10),
       user: 'user1',
-      isPrivate: false,
+      isPrivate: privateReservation,
     };
     addNewReservation(selectedRoom.id, selectedDesk.id, newReservation);
     reserveWindowControl(false);
@@ -34,22 +33,29 @@ export default function ReserveDeskForm({
   return (
     <StyledForm onSubmit={handleSubmit}>
       <ReserveHeader>Reserve {selectedDesk?.name}</ReserveHeader>
-      <label htmlFor="starttime">Start Time:</label>
-      <input type="time" id="starttime" name="starttime" required />
-      <label htmlFor="endtime">End Time:</label>
-      <input type="time" id="endtime" name="endtime" required />
-      {/* <label htmlFor="date">Date:</label> */}
-      {/* <input
-        min={today}
-        type="date"
-        id="date"
-        name="date"
+      <StyledBigLabel htmlFor="starttime">Start Time:</StyledBigLabel>
+      <StyledBigInput
+        type="time"
+        id="starttime"
+        name="starttime"
+        min="06:00"
+        max="20:00"
         required
-        defaultValue={selectedDate.toISOString().substring(0, 10)}
-      /> */}
-      <Cancelbutton type="button" onClick={handleClick}>
+      />
+      <StyledBigLabel htmlFor="endtime">End Time:</StyledBigLabel>
+      <StyledBigInput
+        type="time"
+        id="endtime"
+        name="endtime"
+        min="06:00"
+        max="20:00"
+        required
+      />
+      <PrivateInput type="checkbox" name="private" id="private" />
+      <PrivateLabel htmlFor="private">Private reservation</PrivateLabel>
+      <CancelButton type="button" onClick={handleClick}>
         Cancel
-      </Cancelbutton>
+      </CancelButton>
       <ReserveButton type="submit">Reserve</ReserveButton>
     </StyledForm>
   );
@@ -58,31 +64,54 @@ export default function ReserveDeskForm({
 const StyledForm = styled.form`
   width: 100%;
   display: grid;
-  grid-template-columns: 7rem auto;
+  grid-template-columns: 1rem auto auto auto;
+  grid-row-gap: 0.3rem;
   background-color: rgba(101, 181, 255, 0.8);
   border-radius: 22px;
   padding: 1rem;
-  gap: 0.2rem 1rem;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
-const ReserveHeader = styled.h3`
+const StyledBigLabel = styled.label`
   grid-column: span 2;
+`;
+
+const StyledBigInput = styled.input`
+  text-align: center;
+  grid-column: span 2;
+`;
+
+const ReserveHeader = styled.h3`
+  grid-column: span 3;
   margin: 0;
   text-decoration: underline;
 `;
 
 const ReserveButton = styled.button`
+  grid-column: span 2;
+  grid-row-start: 5;
   border: none;
   height: 2rem;
-  justify-self: end;
   width: 7rem;
   border-radius: 1rem;
   background-color: rgba(77, 255, 73, 0.7);
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   font-size: 1.2rem;
+  justify-self: center;
 `;
 
-const Cancelbutton = styled(ReserveButton)`
+const CancelButton = styled(ReserveButton)`
   background-color: rgba(255, 74, 74, 0.7);
+`;
+
+const PrivateInput = styled.input`
+  grid-row-start: 4;
+  margin-left: 0;
+`;
+
+const PrivateLabel = styled.label`
+  grid-column-start: 2;
+  grid-column: span 3;
+  grid-row-start: 4;
+  flex-grow: 1;
 `;

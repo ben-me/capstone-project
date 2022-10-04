@@ -14,6 +14,9 @@ export default function DeskInfoBox({
       }
     }
   );
+  filteredReservations.sort((a, b) => {
+    return a.starttime - b.starttime;
+  });
 
   return (
     <>
@@ -27,6 +30,7 @@ export default function DeskInfoBox({
             return (
               <li key={reservation.id}>
                 From {reservation.starttime} to {reservation.endtime}
+                {reservation.isPrivate ? '' : ` by ${reservation.user}`}
               </li>
             );
           })}
@@ -41,6 +45,7 @@ export default function DeskInfoBox({
 const Infobox = styled.ul`
   width: 100%;
   padding-left: 1.25rem;
+  padding-bottom: 0.3rem;
   border: 1px solid black;
   border-radius: 7px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
