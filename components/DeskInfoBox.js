@@ -27,6 +27,7 @@ export default function DeskInfoBox({
             return (
               <li key={reservation.id}>
                 From {reservation.starttime} to {reservation.endtime}
+                {reservation.isPrivate ? '' : ` by ${reservation.user}`}
               </li>
             );
           })}
@@ -39,15 +40,13 @@ export default function DeskInfoBox({
 }
 
 const Infobox = styled.ul`
-  width: 350px;
-  position: fixed;
-  padding-left: 20px;
-  transform: translate(-50%);
+  width: 100%;
+  padding-left: 1.25rem;
+  padding-bottom: 0.3rem;
   border: 1px solid black;
   border-radius: 7px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  left: 50%;
-  bottom: 40px;
+  background-color: white;
 `;
 
 const ReservationHeader = styled.h4`
@@ -59,8 +58,8 @@ const CloseButton = styled.button`
   padding: 0;
   background: none;
   border: none;
-  width: 20px;
-  height: 20px;
-  top: 0;
-  right: 5px;
+  width: 1.25rem;
+  height: 1.25rem;
+  top: 1rem;
+  right: 0.5rem;
 `;

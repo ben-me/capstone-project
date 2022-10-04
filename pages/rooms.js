@@ -31,9 +31,9 @@ const RoomList = styled.ul`
   display: flex;
   flex-direction: column;
   padding: 0;
-  gap: 35px;
+  gap: 2.188rem;
   margin: 0 auto;
   margin-bottom: 1.5rem;
-  width: 375px;
-  left: 26px;
+  width: 23.438rem;
+  left: 1.625rem;
 `;
