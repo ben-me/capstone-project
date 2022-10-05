@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 export default function BurgerMenu() {
   return (
-    <Menu width={'50%'} right>
+    <Menu width={'65%'} right>
       <Link href="/" passHref>
         <OverlayLink>Home</OverlayLink>
       </Link>

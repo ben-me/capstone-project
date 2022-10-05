@@ -14,7 +14,7 @@ body {
 }
 
 .bm-burger-button {
-    position: fixed;
+    position: absolute;
     width: 2.4rem;
     height: 2rem;
     right: 0.4rem;
@@ -64,7 +64,8 @@ Note: Beware of modifying this element as it can break the animations - you shou
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    font-size:1rem;
+    font-size:1.3rem;
+    text-align:center;
     color: #b8b7ad;
     padding: 0.3em;
   }
