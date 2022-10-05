@@ -3,6 +3,7 @@ import { getAllRooms } from '../services/roomService';
 import styled from 'styled-components';
 import BackButton from '../components/BackButton';
 import Header from '../components/Header';
+import BurgerMenu from '../components/BurgerMenu';
 
 export async function getStaticProps() {
   const rooms = await getAllRooms();
@@ -16,6 +17,7 @@ export async function getStaticProps() {
 export default function Rooms({ rooms }) {
   return (
     <>
+      <BurgerMenu />
       <BackButton page={'/'} />
       <Header title={'All Rooms'} />
       <RoomList>
