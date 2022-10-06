@@ -1,19 +1,38 @@
 import { slide as Menu } from 'react-burger-menu';
 import Link from 'next/link';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import BurgerIcon from '../public/burgermenu.png';
+import Image from 'next/image';
 
 export default function BurgerMenu() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
+
+  function checkLink(event) {
+    if (event.target.pathname === router.pathname) {
+      setIsMenuOpen(false);
+    }
+  }
+
   return (
     <BurgerMenuStyles>
-      <Menu width={'65%'} right>
+      <Menu
+        customBurgerIcon={<Image src={BurgerIcon} alt="burger-menu" />}
+        width={'65%'}
+        right
+        isOpen={isMenuOpen}
+        onStateChange={(state) => setIsMenuOpen(state.isOpen)}
+      >
         <Link href="/" passHref>
-          <OverlayLink>Home</OverlayLink>
+          <OverlayLink onClick={checkLink}>Home</OverlayLink>
         </Link>
         <Link href="/rooms" passHref>
-          <OverlayLink>Show rooms</OverlayLink>
+          <OverlayLink onClick={checkLink}>Show rooms</OverlayLink>
         </Link>
         <Link href="/reservations" passHref>
-          <OverlayLink>My Reservations</OverlayLink>
+          <OverlayLink onClick={checkLink}>My Reservations</OverlayLink>
         </Link>
       </Menu>
     </BurgerMenuStyles>
@@ -30,7 +49,7 @@ const BurgerMenuStyles = styled.div`
     position: absolute;
     width: 2.4rem;
     height: 2rem;
-    right: 0.4rem;
+    right: 0.7rem;
     top: 1.5rem;
     background-color: transparent;
   }
