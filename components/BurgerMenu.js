@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import BurgerIcon from '../public/burgermenu.png';
-import Image from 'next/image';
+import Image from 'next/future/image';
 
 export default function BurgerMenu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,13 +26,25 @@ export default function BurgerMenu() {
         onStateChange={(state) => setIsMenuOpen(state.isOpen)}
       >
         <Link href="/" passHref>
-          <OverlayLink onClick={checkLink}>Home</OverlayLink>
+          <OverlayLink active={'/' === router.pathname} onClick={checkLink}>
+            Home
+          </OverlayLink>
         </Link>
         <Link href="/rooms" passHref>
-          <OverlayLink onClick={checkLink}>Show rooms</OverlayLink>
+          <OverlayLink
+            active={'/rooms' === router.pathname}
+            onClick={checkLink}
+          >
+            Rooms
+          </OverlayLink>
         </Link>
         <Link href="/reservations" passHref>
-          <OverlayLink onClick={checkLink}>My Reservations</OverlayLink>
+          <OverlayLink
+            active={'/reservations' === router.pathname}
+            onClick={checkLink}
+          >
+            My Reservations
+          </OverlayLink>
         </Link>
       </Menu>
     </BurgerMenuStyles>
@@ -41,7 +53,7 @@ export default function BurgerMenu() {
 
 const OverlayLink = styled.a`
   text-decoration: none;
-  color: white;
+  color: ${(props) => (props.active ? 'red' : 'white')};
 `;
 
 const BurgerMenuStyles = styled.div`

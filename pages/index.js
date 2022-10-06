@@ -2,10 +2,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styled from 'styled-components';
 import Office from '../public/office.jpg';
+import BurgerMenu from '../components/BurgerMenu';
 
 export default function Home() {
   return (
     <Container>
+      <BurgerMenu />
       <Image
         src={Office}
         alt="background"
