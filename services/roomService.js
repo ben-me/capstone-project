@@ -149,7 +149,16 @@ const rooms = [
       {
         id: '2',
         name: 'Desk 2',
-        reservations: [],
+        reservations: [
+          {
+            id: '6',
+            starttime: '14:00',
+            endtime: '16:00',
+            date: '2022-09-28',
+            user: 'user1',
+            isPrivate: false,
+          },
+        ],
       },
       {
         id: '3',
@@ -251,4 +260,23 @@ function getTimeFromString(string) {
   const splitTime = string.split(':');
   const timeInMinutes = splitTime[0] * 60 + splitTime[1];
   return timeInMinutes;
+}
+
+export function getReservationByUser() {
+  const userReservations = [];
+  rooms.map((room) => {
+    room.desks.map((desk) => {
+      desk.reservations.map((reservation) => {
+        if (reservation.user === 'user1') {
+          userReservations.push(reservation);
+        }
+      });
+    });
+  });
+  userReservations.sort((a, b) => {
+    a = a.date.split('-').join('');
+    b = b.date.split('-').join('');
+    return a.localeCompare(b);
+  });
+  return userReservations;
 }
