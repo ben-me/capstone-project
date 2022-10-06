@@ -8,6 +8,7 @@ import DeskInfoBox from '../../components/DeskInfoBox';
 import { getAllRooms, getRoomById } from '../../services/roomService';
 import ReserveDeskForm from '../../components/ReserveDeskForm';
 import useSWR, { SWRConfig } from 'swr';
+import BurgerMenu from '../../components/BurgerMenu';
 
 export async function getStaticPaths() {
   const allRooms = await getAllRooms();
@@ -69,6 +70,7 @@ export default function RoomPage({ roomDetails }) {
     <>
       <SWRConfig>
         <BackButton page={'/rooms'} />
+        <BurgerMenu />
         <Header title={roomDetails.name} />
         <Calendar onChangeDate={changeDate} stateDate={selectedDate} />
         <DeskList>
