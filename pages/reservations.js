@@ -5,7 +5,9 @@ import ReservationItem from '../components/ReservationItem';
 import { getReservationByUser } from '../services/roomService';
 
 export async function getServerSideProps() {
-  const foundReservations = await getReservationByUser();
+  const today = new Date();
+  const givenDate = today.toISOString().substring(0, 10);
+  const foundReservations = await getReservationByUser(givenDate);
   return {
     props: {
       foundReservations,
