@@ -262,12 +262,16 @@ function getTimeFromString(string) {
   return timeInMinutes;
 }
 
-export function getReservationByUser() {
+export function getReservationByUser(date) {
   const userReservations = [];
   rooms.map((room) => {
     room.desks.map((desk) => {
       desk.reservations.map((reservation) => {
-        if (reservation.user === 'user1') {
+        const today = Date.parse(date);
+        const resDate = Date.parse(reservation.date);
+        if (reservation.user === 'user1' && resDate > today) {
+          reservation.room = room.name;
+          reservation.desk = desk.name;
           userReservations.push(reservation);
         }
       });
@@ -278,5 +282,6 @@ export function getReservationByUser() {
     b = b.date.split('-').join('');
     return a.localeCompare(b);
   });
+
   return userReservations;
 }
