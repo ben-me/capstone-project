@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
       <Component
         {...pageProps}
         userReservations={userReservations}
-        setUserReservations={userReservations}
+        setUserReservations={setUserReservations}
       />
     </>
   );
