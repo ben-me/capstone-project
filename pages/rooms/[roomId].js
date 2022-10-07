@@ -7,7 +7,6 @@ import Header from '../../components/Header';
 import DeskInfoBox from '../../components/DeskInfoBox';
 import { getAllRooms, getRoomById } from '../../services/roomService';
 import ReserveDeskForm from '../../components/ReserveDeskForm';
-import useSWR, { SWRConfig } from 'swr';
 import BurgerMenu from '../../components/BurgerMenu';
 
 export async function getStaticPaths() {
@@ -31,14 +30,49 @@ export async function getStaticProps(context) {
   };
 }
 
-const fetcher = (id) => getRoomById(id);
-
-export default function RoomPage({ roomDetails }) {
-  const { data } = useSWR(roomDetails.id, fetcher);
+export default function RoomPage({
+  roomDetails,
+  userReservations,
+  onSetUserReservations,
+  allRooms,
+}) {
+  const [currentRoom, setCurrentRoom] = useState(() =>
+    allRooms.find((room) => roomDetails.id === room.id)
+  );
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [detailsWindowActive, setDetailsWindowActive] = useState(false);
   const [highlightedDesk, setHighlightedDesk] = useState(null);
   const [reserveWindowActive, setReserveWindowActive] = useState(false);
+
+  function addReservation(newReservation, deskID) {
+    const singleDesk = currentRoom.desks.find((desk) => desk.id === deskID);
+    const reservationDates = singleDesk.reservations.filter(
+      (reservation) => reservation.date === newReservation.date
+    );
+    const newResStart = getTimeFromString(newReservation.starttime);
+    const newResEnd = getTimeFromString(newReservation.endtime);
+
+    const overlappingReservations = reservationDates.filter((reservation) => {
+      const currentResStart = getTimeFromString(reservation.starttime);
+      const currentResEnd = getTimeFromString(reservation.endtime);
+      if (
+        (currentResStart < newResStart && newResStart < currentResEnd) ||
+        (currentResStart < newResEnd && newResEnd < currentResEnd) ||
+        (currentResStart === newResStart && currentResEnd === newResEnd) ||
+        (newResStart < currentResStart && newResEnd > currentResEnd)
+      ) {
+        return reservation;
+      }
+    });
+
+    if (overlappingReservations.length > 0 || newResEnd <= newResStart) {
+      alert(
+        "Invalid entry. Only reserve free timeslots between 06:00 and 20:00 o'clock"
+      );
+    } else {
+      singleDesk.reservations.push(newReservation);
+    }
+  }
 
   function changeDate(date) {
     setSelectedDate(date);
@@ -59,6 +93,11 @@ export default function RoomPage({ roomDetails }) {
       setHighlightedDesk(selectedDesk);
     }
   }
+  function getTimeFromString(string) {
+    const splitTime = string.split(':');
+    const timeInMinutes = splitTime[0] * 60 + splitTime[1];
+    return timeInMinutes;
+  }
 
   function removeHighlight() {
     setHighlightedDesk(null);
@@ -68,52 +107,53 @@ export default function RoomPage({ roomDetails }) {
 
   return (
     <>
-      <SWRConfig>
-        <BackButton page={'/rooms'} />
-        <BurgerMenu />
-        <Header title={roomDetails.name} />
-        <Calendar onChangeDate={changeDate} stateDate={selectedDate} />
-        <DeskList>
-          {data?.desks.map((desk) => (
-            <DeskItem
-              key={desk.id}
-              deskDetails={desk}
-              onShowDetails={showDetails}
-              currentHighlightedDesk={highlightedDesk?.id}
-            />
-          ))}
-        </DeskList>
-        <BoxContainer>
-          {detailsWindowActive ? (
-            <DeskInfoBox
-              highlightedDesk={highlightedDesk}
-              onRemoveHighlight={removeHighlight}
-              selectedDate={selectedDate}
-            />
-          ) : (
-            ''
-          )}
-          {reserveWindowActive ? (
-            <ReserveDeskForm
-              selectedRoom={roomDetails}
-              selectedDesk={highlightedDesk}
-              reserveWindowControl={setReserveWindowActive}
-              selectedDate={selectedDate}
-            />
-          ) : (
-            <ReserveButton
-              type="button"
-              onClick={() => {
-                if (highlightedDesk && detailsWindowActive) {
-                  setReserveWindowActive(true);
-                }
-              }}
-            >
-              Reserve
-            </ReserveButton>
-          )}
-        </BoxContainer>
-      </SWRConfig>
+      <BackButton page={'/rooms'} />
+      <BurgerMenu />
+      <Header title={currentRoom.name} />
+      <Calendar onChangeDate={changeDate} stateDate={selectedDate} />
+      <DeskList>
+        {currentRoom.desks.map((desk) => (
+          <DeskItem
+            key={desk.id}
+            deskDetails={desk}
+            onShowDetails={showDetails}
+            currentHighlightedDesk={highlightedDesk?.id}
+          />
+        ))}
+      </DeskList>
+      <BoxContainer>
+        {detailsWindowActive ? (
+          <DeskInfoBox
+            highlightedDesk={highlightedDesk}
+            onRemoveHighlight={removeHighlight}
+            selectedDate={selectedDate}
+          />
+        ) : (
+          ''
+        )}
+        {reserveWindowActive ? (
+          <ReserveDeskForm
+            onAddReservation={addReservation}
+            userReservations={userReservations}
+            setUserReservations={onSetUserReservations}
+            selectedRoom={currentRoom}
+            selectedDesk={highlightedDesk}
+            reserveWindowControl={setReserveWindowActive}
+            selectedDate={selectedDate}
+          />
+        ) : (
+          <ReserveButton
+            type="button"
+            onClick={() => {
+              if (highlightedDesk && detailsWindowActive) {
+                setReserveWindowActive(true);
+              }
+            }}
+          >
+            Reserve
+          </ReserveButton>
+        )}
+      </BoxContainer>
     </>
   );
 }

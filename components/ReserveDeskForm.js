@@ -1,11 +1,14 @@
+import { nanoid } from 'nanoid';
 import styled from 'styled-components';
-import { addNewReservation } from '../services/roomService';
 
 export default function ReserveDeskForm({
   selectedDesk,
   reserveWindowControl,
   selectedDate,
   selectedRoom,
+  setUserReservations,
+  userReservations,
+  onAddReservation,
 }) {
   function handleClick(event) {
     event.preventDefault();
@@ -20,14 +23,23 @@ export default function ReserveDeskForm({
     const privateReservation = form.private.checked;
 
     const newReservation = {
+      id: nanoid(),
       starttime: inputStartTime,
       endtime: inputEndTime,
       date: selectedDate.toISOString().substring(0, 10),
       user: 'user1',
       isPrivate: privateReservation,
     };
-    addNewReservation(selectedRoom.id, selectedDesk.id, newReservation);
-    reserveWindowControl(false);
+    setUserReservations([
+      ...userReservations,
+      {
+        desk: selectedDesk.name,
+        room: selectedRoom.name,
+        ...newReservation,
+      },
+    ]);
+    onAddReservation(newReservation, selectedDesk.id);
+    form.reset();
   }
 
   return (
@@ -39,7 +51,7 @@ export default function ReserveDeskForm({
         id="starttime"
         name="starttime"
         min="06:00"
-        max="20:00"
+        max="20:01"
         required
       />
       <StyledBigLabel htmlFor="endtime">End Time:</StyledBigLabel>
@@ -48,7 +60,7 @@ export default function ReserveDeskForm({
         id="endtime"
         name="endtime"
         min="06:00"
-        max="20:00"
+        max="20:01"
         required
       />
       <PrivateInput type="checkbox" name="private" id="private" />
