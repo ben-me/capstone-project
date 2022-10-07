@@ -5,9 +5,6 @@ export default function ReserveDeskForm({
   selectedDesk,
   reserveWindowControl,
   selectedDate,
-  selectedRoom,
-  setUserReservations,
-  userReservations,
   onAddReservation,
 }) {
   function handleClick(event) {
@@ -30,14 +27,6 @@ export default function ReserveDeskForm({
       user: 'user1',
       isPrivate: privateReservation,
     };
-    setUserReservations([
-      ...userReservations,
-      {
-        desk: selectedDesk.name,
-        room: selectedRoom.name,
-        ...newReservation,
-      },
-    ]);
     onAddReservation(newReservation, selectedDesk.id);
     form.reset();
   }

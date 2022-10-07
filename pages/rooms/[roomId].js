@@ -33,19 +33,22 @@ export async function getStaticProps(context) {
 export default function RoomPage({
   roomDetails,
   userReservations,
-  onSetUserReservations,
+  setUserReservations,
   allRooms,
+  setAllRooms,
 }) {
-  const [currentRoom, setCurrentRoom] = useState(() =>
-    allRooms.find((room) => roomDetails.id === room.id)
-  );
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [detailsWindowActive, setDetailsWindowActive] = useState(false);
   const [highlightedDesk, setHighlightedDesk] = useState(null);
   const [reserveWindowActive, setReserveWindowActive] = useState(false);
+  const roomIndex = allRooms.map((room) => room.id).indexOf(roomDetails.id);
+  const currentRoom = allRooms[roomIndex];
 
   function addReservation(newReservation, deskID) {
     const singleDesk = currentRoom.desks.find((desk) => desk.id === deskID);
+    const deskIndex = allRooms[roomIndex].desks
+      .map((desk) => desk.id)
+      .indexOf(deskID);
     const reservationDates = singleDesk.reservations.filter(
       (reservation) => reservation.date === newReservation.date
     );
@@ -70,7 +73,9 @@ export default function RoomPage({
         "Invalid entry. Only reserve free timeslots between 06:00 and 20:00 o'clock"
       );
     } else {
-      singleDesk.reservations.push(newReservation);
+      const allRoomCopy = [...allRooms];
+      allRoomCopy[roomIndex].desks[deskIndex].reservations.push(newReservation);
+      setAllRooms(allRoomCopy);
     }
   }
 
@@ -109,10 +114,10 @@ export default function RoomPage({
     <>
       <BackButton page={'/rooms'} />
       <BurgerMenu />
-      <Header title={currentRoom.name} />
+      <Header title={allRooms[roomIndex].name} />
       <Calendar onChangeDate={changeDate} stateDate={selectedDate} />
       <DeskList>
-        {currentRoom.desks.map((desk) => (
+        {allRooms[roomIndex].desks.map((desk) => (
           <DeskItem
             key={desk.id}
             deskDetails={desk}
@@ -133,10 +138,11 @@ export default function RoomPage({
         )}
         {reserveWindowActive ? (
           <ReserveDeskForm
+            allRooms={allRooms}
             onAddReservation={addReservation}
             userReservations={userReservations}
-            setUserReservations={onSetUserReservations}
-            selectedRoom={currentRoom}
+            setUserReservations={setUserReservations}
+            selectedRoom={allRooms[roomIndex]}
             selectedDesk={highlightedDesk}
             reserveWindowControl={setReserveWindowActive}
             selectedDate={selectedDate}

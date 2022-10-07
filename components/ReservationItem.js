@@ -1,20 +1,51 @@
 import styled from 'styled-components';
+import Trash from '../public/trash.svg';
+import Image from 'next/image';
 
-export default function ReservationItem({ reservation }) {
+export default function ReservationItem({
+  reservation,
+  setAllRooms,
+  allRooms,
+}) {
+  let formattedDate = reservation.date.split('-').reverse();
+  formattedDate = formattedDate.join('.');
+
+  function deleteReservation(reservationId) {
+    const roomsCopy = [...allRooms];
+    roomsCopy.forEach((room) => {
+      room.desks.forEach((desk) => {
+        desk.reservations = desk.reservations.filter((reservation) => {
+          return reservation.id !== reservationId;
+        });
+      });
+    });
+    setAllRooms(roomsCopy);
+  }
+
+  function handleClick() {
+    deleteReservation(reservation.id);
+  }
+
   return (
     <StyledListElement>
-      <DateHeader>{reservation.date}</DateHeader>
+      <DateHeader>{formattedDate}</DateHeader>
       <RommHeader>{reservation.room}</RommHeader>
       <DeskHeader>{reservation.desk}</DeskHeader>
       <Reservations>
         {reservation.starttime} - {reservation.endtime}
       </Reservations>
+      <DeleteButton onClick={handleClick}>
+        <Image alt="trashcan" src={Trash} />
+      </DeleteButton>
     </StyledListElement>
   );
 }
 
 const StyledListElement = styled.li`
-  margin: 1rem;
+  margin: 0.3rem 1rem;
+  border: 1px solid black;
+  padding: 1rem;
+  position: relative;
 `;
 
 const DateHeader = styled.h3`
@@ -34,4 +65,12 @@ const DeskHeader = styled.h5`
 `;
 const Reservations = styled.p`
   margin: 0;
+`;
+
+const DeleteButton = styled.button`
+  background: none;
+  border: none;
+  position: absolute;
+  top: 35%;
+  right: 0;
 `;
