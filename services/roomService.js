@@ -222,28 +222,3 @@ export function getAllRooms() {
 export function getRoomById(id) {
   return rooms.find((room) => room.id === id);
 }
-
-export function getReservationByUser() {
-  const date = new Date().toISOString().substring(0, 10);
-  const userReservations = [];
-  rooms.map((room) => {
-    room.desks.map((desk) => {
-      desk.reservations.map((reservation) => {
-        const today = Date.parse(date);
-        const resDate = Date.parse(reservation.date);
-        if (reservation.user === 'user1' && resDate > today) {
-          reservation.room = room.name;
-          reservation.desk = desk.name;
-          userReservations.push(reservation);
-        }
-      });
-    });
-  });
-  userReservations.sort((a, b) => {
-    a = a.date.split('-').join('');
-    b = b.date.split('-').join('');
-    return a.localeCompare(b);
-  });
-
-  return userReservations;
-}
