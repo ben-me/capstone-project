@@ -61,8 +61,8 @@ export default function RoomPage({
       if (
         (currentResStart < newResStart && newResStart < currentResEnd) ||
         (currentResStart < newResEnd && newResEnd < currentResEnd) ||
-        (currentResStart === newResStart && currentResEnd === newResEnd) ||
-        (newResStart < currentResStart && newResEnd > currentResEnd)
+        (currentResStart >= newResStart && currentResEnd >= newResEnd) ||
+        (currentResStart >= newResStart && currentResEnd <= newResEnd)
       ) {
         return reservation;
       }
