@@ -7,7 +7,6 @@ import Header from '../../components/Header';
 import DeskInfoBox from '../../components/DeskInfoBox';
 import { getAllRooms, getRoomById } from '../../services/roomService';
 import ReserveDeskForm from '../../components/ReserveDeskForm';
-import useSWR, { SWRConfig } from 'swr';
 import BurgerMenu from '../../components/BurgerMenu';
 
 export async function getStaticPaths() {
@@ -31,14 +30,57 @@ export async function getStaticProps(context) {
   };
 }
 
-const fetcher = (id) => getRoomById(id);
-
-export default function RoomPage({ roomDetails }) {
-  const { data } = useSWR(roomDetails.id, fetcher);
+export default function RoomPage({
+  roomDetails,
+  userReservations,
+  setUserReservations,
+  allRooms,
+  setAllRooms,
+}) {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [detailsWindowActive, setDetailsWindowActive] = useState(false);
   const [highlightedDesk, setHighlightedDesk] = useState(null);
   const [reserveWindowActive, setReserveWindowActive] = useState(false);
+  const roomIndex = allRooms.map((room) => room.id).indexOf(roomDetails.id);
+  const currentRoom = allRooms[roomIndex];
+
+  function addReservation(newReservation, deskID) {
+    const singleDesk = currentRoom.desks.find((desk) => desk.id === deskID);
+    const deskIndex = allRooms[roomIndex].desks
+      .map((desk) => desk.id)
+      .indexOf(deskID);
+    const reservationDates = singleDesk.reservations.filter(
+      (reservation) => reservation.date === newReservation.date
+    );
+    const newResStart = getTimeFromString(newReservation.starttime);
+    const newResEnd = getTimeFromString(newReservation.endtime);
+    console.log('Start' + newResStart);
+    console.log('End ' + newResEnd);
+
+    const overlappingReservations = reservationDates.filter((reservation) => {
+      const currentResStart = getTimeFromString(reservation.starttime);
+      const currentResEnd = getTimeFromString(reservation.endtime);
+      if (
+        (currentResStart < newResStart && newResStart < currentResEnd) ||
+        (currentResStart < newResEnd && newResEnd < currentResEnd) ||
+        (currentResStart >= newResStart && currentResEnd >= newResEnd) ||
+        (currentResStart >= newResStart && currentResEnd <= newResEnd)
+      ) {
+        return reservation;
+      }
+    });
+
+    if (newResStart > newResEnd || overlappingReservations.length > 0) {
+      alert(
+        "Invalid entry. Only reserve free timeslots between 06:00 and 20:00 o'clock"
+      );
+    } else {
+      const allRoomCopy = [...allRooms];
+      allRoomCopy[roomIndex].desks[deskIndex].reservations.push(newReservation);
+      setAllRooms(allRoomCopy);
+      console.log(overlappingReservations);
+    }
+  }
 
   function changeDate(date) {
     setSelectedDate(date);
@@ -59,6 +101,11 @@ export default function RoomPage({ roomDetails }) {
       setHighlightedDesk(selectedDesk);
     }
   }
+  function getTimeFromString(string) {
+    const splitTime = string.split(':');
+    const timeInMinutes = splitTime[0] * 60 + splitTime[1];
+    return Number(timeInMinutes);
+  }
 
   function removeHighlight() {
     setHighlightedDesk(null);
@@ -68,52 +115,54 @@ export default function RoomPage({ roomDetails }) {
 
   return (
     <>
-      <SWRConfig>
-        <BackButton page={'/rooms'} />
-        <BurgerMenu />
-        <Header title={roomDetails.name} />
-        <Calendar onChangeDate={changeDate} stateDate={selectedDate} />
-        <DeskList>
-          {data?.desks.map((desk) => (
-            <DeskItem
-              key={desk.id}
-              deskDetails={desk}
-              onShowDetails={showDetails}
-              currentHighlightedDesk={highlightedDesk?.id}
-            />
-          ))}
-        </DeskList>
-        <BoxContainer>
-          {detailsWindowActive ? (
-            <DeskInfoBox
-              highlightedDesk={highlightedDesk}
-              onRemoveHighlight={removeHighlight}
-              selectedDate={selectedDate}
-            />
-          ) : (
-            ''
-          )}
-          {reserveWindowActive ? (
-            <ReserveDeskForm
-              selectedRoom={roomDetails}
-              selectedDesk={highlightedDesk}
-              reserveWindowControl={setReserveWindowActive}
-              selectedDate={selectedDate}
-            />
-          ) : (
-            <ReserveButton
-              type="button"
-              onClick={() => {
-                if (highlightedDesk && detailsWindowActive) {
-                  setReserveWindowActive(true);
-                }
-              }}
-            >
-              Reserve
-            </ReserveButton>
-          )}
-        </BoxContainer>
-      </SWRConfig>
+      <BackButton page={'/rooms'} />
+      <BurgerMenu />
+      <Header title={allRooms[roomIndex].name} />
+      <Calendar onChangeDate={changeDate} stateDate={selectedDate} />
+      <DeskList>
+        {allRooms[roomIndex].desks.map((desk) => (
+          <DeskItem
+            key={desk.id}
+            deskDetails={desk}
+            onShowDetails={showDetails}
+            currentHighlightedDesk={highlightedDesk?.id}
+          />
+        ))}
+      </DeskList>
+      <BoxContainer>
+        {detailsWindowActive ? (
+          <DeskInfoBox
+            highlightedDesk={highlightedDesk}
+            onRemoveHighlight={removeHighlight}
+            selectedDate={selectedDate}
+          />
+        ) : (
+          ''
+        )}
+        {reserveWindowActive ? (
+          <ReserveDeskForm
+            allRooms={allRooms}
+            onAddReservation={addReservation}
+            userReservations={userReservations}
+            setUserReservations={setUserReservations}
+            selectedRoom={allRooms[roomIndex]}
+            selectedDesk={highlightedDesk}
+            reserveWindowControl={setReserveWindowActive}
+            selectedDate={selectedDate}
+          />
+        ) : (
+          <ReserveButton
+            type="button"
+            onClick={() => {
+              if (highlightedDesk && detailsWindowActive) {
+                setReserveWindowActive(true);
+              }
+            }}
+          >
+            Reserve
+          </ReserveButton>
+        )}
+      </BoxContainer>
     </>
   );
 }

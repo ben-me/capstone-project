@@ -1,5 +1,3 @@
-import { nanoid } from 'nanoid';
-
 const rooms = [
   {
     id: '1',
@@ -149,7 +147,16 @@ const rooms = [
       {
         id: '2',
         name: 'Desk 2',
-        reservations: [],
+        reservations: [
+          {
+            id: '6',
+            starttime: '14:00',
+            endtime: '16:00',
+            date: '2022-09-28',
+            user: 'user1',
+            isPrivate: false,
+          },
+        ],
       },
       {
         id: '3',
@@ -214,41 +221,4 @@ export function getAllRooms() {
 
 export function getRoomById(id) {
   return rooms.find((room) => room.id === id);
-}
-
-export function addNewReservation(roomID, deskID, newReservation) {
-  const singleRoom = rooms.find((room) => room.id === roomID);
-  const singleDesk = singleRoom.desks.find((desk) => desk.id === deskID);
-  const reservationDates = singleDesk.reservations.filter(
-    (reservation) => reservation.date === newReservation.date
-  );
-  const newResStart = getTimeFromString(newReservation.starttime);
-  const newResEnd = getTimeFromString(newReservation.endtime);
-
-  const overlappingReservations = reservationDates.filter((reservation) => {
-    const currentResStart = getTimeFromString(reservation.starttime);
-    const currentResEnd = getTimeFromString(reservation.endtime);
-    if (
-      (currentResStart < newResStart && newResStart < currentResEnd) ||
-      (currentResStart < newResEnd && newResEnd < currentResEnd) ||
-      (currentResStart === newResStart && currentResEnd === newResEnd) ||
-      (newResStart < currentResStart && newResEnd > currentResEnd)
-    ) {
-      return reservation;
-    }
-  });
-
-  if (overlappingReservations.length > 0 || newResEnd <= newResStart) {
-    alert(
-      "Invalid entry. Only reserve free timeslots between 06:00 and 20:00 o'clock"
-    );
-  } else {
-    singleDesk.reservations.push({ id: nanoid(), ...newReservation });
-  }
-}
-
-function getTimeFromString(string) {
-  const splitTime = string.split(':');
-  const timeInMinutes = splitTime[0] * 60 + splitTime[1];
-  return timeInMinutes;
 }
