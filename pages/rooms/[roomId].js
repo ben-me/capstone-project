@@ -54,6 +54,8 @@ export default function RoomPage({
     );
     const newResStart = getTimeFromString(newReservation.starttime);
     const newResEnd = getTimeFromString(newReservation.endtime);
+    console.log('Start' + newResStart);
+    console.log('End ' + newResEnd);
 
     const overlappingReservations = reservationDates.filter((reservation) => {
       const currentResStart = getTimeFromString(reservation.starttime);
@@ -68,7 +70,7 @@ export default function RoomPage({
       }
     });
 
-    if (overlappingReservations.length > 0 || newResEnd <= newResStart) {
+    if (newResStart > newResEnd || overlappingReservations.length > 0) {
       alert(
         "Invalid entry. Only reserve free timeslots between 06:00 and 20:00 o'clock"
       );
@@ -76,6 +78,7 @@ export default function RoomPage({
       const allRoomCopy = [...allRooms];
       allRoomCopy[roomIndex].desks[deskIndex].reservations.push(newReservation);
       setAllRooms(allRoomCopy);
+      console.log(overlappingReservations);
     }
   }
 
@@ -101,7 +104,7 @@ export default function RoomPage({
   function getTimeFromString(string) {
     const splitTime = string.split(':');
     const timeInMinutes = splitTime[0] * 60 + splitTime[1];
-    return timeInMinutes;
+    return Number(timeInMinutes);
   }
 
   function removeHighlight() {
