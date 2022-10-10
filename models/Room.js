@@ -1,24 +1,24 @@
-import mongoose, { models } from 'mongoose';
+import mongoose from 'mongoose';
 import { Schema } from 'mongoose';
+
+const reservationSchema = new Schema({
+  id: { type: String },
+  starttime: { type: String },
+  endtime: { type: String },
+  date: { type: String },
+  user: { type: String },
+  isPrivate: { type: Boolean },
+});
+const deskSchema = new Schema({
+  name: { type: String, required: true },
+  reservations: [reservationSchema],
+});
 
 const roomSchema = new Schema({
   name: { type: String, required: true },
-  desks: deskSchema,
+  desks: [deskSchema],
 });
 
-const deskSchema = new Schema({
-  name: { type: String, required },
-  reservations: reservationSchema,
-});
-
-const reservationSchema = new Schema({
-  starttime: { type: String, required },
-  endtime: { type: String, required },
-  date: { type: String, required },
-  user: { type: String, required },
-  isPrivate: { type: Boolean, required },
-});
-
-const Room = models.mongoose.Room || mongoose.model('Room', roomSchema);
+const Room = mongoose.models.Room || mongoose.model('Room', roomSchema);
 
 export default Room;
