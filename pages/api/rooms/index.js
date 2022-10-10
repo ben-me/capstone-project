@@ -9,7 +9,7 @@ export default async function handler(request, response) {
       return response.status(200).json(rooms);
     }
   } catch (error) {
-    console.log('Could not get new list');
+    console.log('Could not get rooms');
     console.error(error);
   }
 }
