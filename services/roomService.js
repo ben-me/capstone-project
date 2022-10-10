@@ -11,7 +11,11 @@ export default async function getAllRooms() {
       desks: desks.map(({ name, reservations }) => {
         return {
           name,
-          reservations,
+          reservations: reservations?.map(
+            ({ starttime, endtime, date, user, isPrivate, id }) => {
+              return { starttime, endtime, date, user, isPrivate, id };
+            }
+          ),
         };
       }),
     };
@@ -29,7 +33,11 @@ export async function getRoomById(roomId) {
     desks: desks.map(({ name, reservations }) => {
       return {
         name,
-        reservations,
+        reservations: reservations?.map(
+          ({ starttime, endtime, date, user, isPrivate, id }) => {
+            return { starttime, endtime, date, user, isPrivate, id };
+          }
+        ),
       };
     }),
   };
