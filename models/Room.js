@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 import { Schema } from 'mongoose';
 
 const reservationSchema = new Schema({
-  id: { type: String },
   starttime: { type: String },
   endtime: { type: String },
   date: { type: String },
@@ -10,7 +9,7 @@ const reservationSchema = new Schema({
   isPrivate: { type: Boolean },
 });
 const deskSchema = new Schema({
-  name: { type: String, required: true },
+  name: { type: String, required: true, unique: true },
   reservations: [reservationSchema],
 });
 
