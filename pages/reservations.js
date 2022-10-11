@@ -1,12 +1,22 @@
 import styled from 'styled-components';
 import BurgerMenu from '../components/BurgerMenu';
 import Header from '../components/Header';
+import getAllRooms from '../services/roomService';
 import ReservationItem from '../components/ReservationItem';
 
-export default function Reservations({ allRooms, setAllRooms }) {
+export async function getStaticProps() {
+  const rooms = await getAllRooms();
+  return {
+    props: {
+      rooms,
+    },
+  };
+}
+
+export default function Reservations({ rooms }) {
   const date = new Date().toISOString().substring(0, 10);
   const userReservations = [];
-  allRooms.map((room) => {
+  rooms.map((room) => {
     room.desks.map((desk) => {
       desk.reservations.map((reservation) => {
         const today = Date.parse(date);
@@ -34,8 +44,7 @@ export default function Reservations({ allRooms, setAllRooms }) {
           <ReservationItem
             key={reservation.id}
             reservation={reservation}
-            allRooms={allRooms}
-            setAllRooms={setAllRooms}
+            allRooms={rooms}
           />
         ))}
       </ReservationList>
