@@ -41,6 +41,7 @@ export default function DeskInfoBox({
 
 const Infobox = styled.ul`
   width: 100%;
+  margin: 0;
   padding-left: 1.25rem;
   padding-bottom: 0.3rem;
   border: 1px solid black;
