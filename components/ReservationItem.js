@@ -2,11 +2,7 @@ import styled from 'styled-components';
 import Trash from '../public/trash.svg';
 import Image from 'next/image';
 
-export default function ReservationItem({
-  reservation,
-  setAllRooms,
-  allRooms,
-}) {
+export default function ReservationItem({ reservation }) {
   let formattedDate = reservation.date.split('-').reverse();
   formattedDate = formattedDate.join('.');
 
@@ -19,7 +15,6 @@ export default function ReservationItem({
         });
       });
     });
-    setAllRooms(roomsCopy);
   }
 
   function handleClick() {
