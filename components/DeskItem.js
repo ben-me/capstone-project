@@ -1,11 +1,12 @@
 import styled from 'styled-components';
+import useSWR from 'swr';
 
 export default function DeskItem({
   deskDetails,
   onShowDetails,
   currentHighlightedDesk,
 }) {
-  const active = currentHighlightedDesk === deskDetails.id;
+  const active = currentHighlightedDesk === deskDetails.name;
 
   return (
     <Desk active={active}>
