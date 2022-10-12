@@ -2,23 +2,23 @@ import styled from 'styled-components';
 import Trash from '../public/trash.svg';
 import Image from 'next/image';
 
-export default function ReservationItem({ reservation }) {
+export default function ReservationItem({
+  reservation,
+  onSetMyReservationList,
+  myReservationList,
+}) {
   let formattedDate = reservation.date.split('-').reverse();
   formattedDate = formattedDate.join('.');
 
-  function deleteReservation(reservationId) {
-    const roomsCopy = [...allRooms];
-    roomsCopy.forEach((room) => {
-      room.desks.forEach((desk) => {
-        desk.reservations = desk.reservations.filter((reservation) => {
-          return reservation.id !== reservationId;
-        });
-      });
+  async function deleteReservation(reservation) {
+    await fetch(`/api/rooms/desks/reservations/${reservation.id}`, {
+      method: 'DELETE',
     });
-  }
-
-  function handleClick() {
-    deleteReservation(reservation.id);
+    onSetMyReservationList(
+      myReservationList.filter(
+        (reservation) => reservation.id !== reservation.id
+      )
+    );
   }
 
   return (
@@ -29,7 +29,7 @@ export default function ReservationItem({ reservation }) {
       <Reservations>
         {reservation.starttime} - {reservation.endtime}
       </Reservations>
-      <DeleteButton onClick={handleClick}>
+      <DeleteButton onClick={() => deleteReservation(reservation)}>
         <Image alt="trashcan" src={Trash} />
       </DeleteButton>
     </StyledListElement>
@@ -38,7 +38,9 @@ export default function ReservationItem({ reservation }) {
 
 const StyledListElement = styled.li`
   margin: 0.3rem 1rem;
-  border: 1px solid black;
+  border-radius: 15px;
+  background-color: var(--primary);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2);
   padding: 1rem;
   position: relative;
 `;
@@ -67,5 +69,5 @@ const DeleteButton = styled.button`
   border: none;
   position: absolute;
   top: 35%;
-  right: 0;
+  right: 0.5rem;
 `;

@@ -3,7 +3,6 @@ import Room from '../../../../../models/Room';
 
 export default async function handler(request, response) {
   await dbConnect();
-
   try {
     if (request.method === 'POST') {
       const {
@@ -47,7 +46,11 @@ export default async function handler(request, response) {
         return response.status(200).json({ message: 'Saved reservation' });
       }
     }
-  } catch (error) {}
+  } catch (error) {
+    response
+      .status(400)
+      .json({ message: 'Could not create reservation', error });
+  }
 }
 
 function getTimeFromString(string) {

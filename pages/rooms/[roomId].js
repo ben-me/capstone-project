@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import BackButton from '../../components/BackButton';
 import Calendar from '../../components/Calendar';
@@ -8,7 +8,7 @@ import DeskInfoBox from '../../components/DeskInfoBox';
 import getAllRooms, { getRoomById } from '../../services/roomService';
 import ReserveDeskForm from '../../components/ReserveDeskForm';
 import BurgerMenu from '../../components/BurgerMenu';
-import useSWR, { SWRConfig } from 'swr';
+import useSWR from 'swr';
 
 export async function getStaticPaths() {
   const allRooms = await getAllRooms();
@@ -23,7 +23,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-  const roomId = context.params.roomId;
+  const roomId = await context.params.roomId;
   const roomDetails = await getRoomById(roomId);
 
   return {
@@ -36,7 +36,9 @@ export async function getStaticProps(context) {
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
 export default function RoomPage({ roomDetails }) {
-  const { data, error } = useSWR(`/api/rooms/${roomDetails.id}`, fetcher);
+  const { data } = useSWR('/api/rooms/' + roomDetails.id, fetcher, {
+    fallbackData: roomDetails,
+  });
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [detailsWindowActive, setDetailsWindowActive] = useState(false);
   const [highlightedDesk, setHighlightedDesk] = useState(null);
@@ -46,6 +48,15 @@ export default function RoomPage({ roomDetails }) {
     setSelectedDate(date);
     removeHighlight();
   }
+
+  useEffect(() => {
+    if (highlightedDesk) {
+      const foundDesk = data.desks.find(
+        (desk) => desk.name === highlightedDesk.name
+      );
+      setHighlightedDesk(foundDesk);
+    }
+  }, [data]);
 
   function showDetails(selectedDesk) {
     if (detailsWindowActive) {
@@ -69,13 +80,13 @@ export default function RoomPage({ roomDetails }) {
   }
 
   return (
-    <SWRConfig value={roomDetails}>
+    <>
       <BackButton page={'/rooms'} />
       <BurgerMenu />
       <Header title={roomDetails.name} />
       <Calendar onChangeDate={changeDate} stateDate={selectedDate} />
       <DeskList>
-        {data?.desks.map((desk) => (
+        {data.desks.map((desk) => (
           <DeskItem
             key={desk.name}
             deskDetails={desk}
@@ -96,8 +107,7 @@ export default function RoomPage({ roomDetails }) {
         )}
         {reserveWindowActive ? (
           <ReserveDeskForm
-            allRooms={roomDetails}
-            selectedRoom={roomDetails.id}
+            selectedRoomId={roomDetails.id}
             selectedDesk={highlightedDesk}
             reserveWindowControl={setReserveWindowActive}
             selectedDate={selectedDate}
@@ -115,7 +125,7 @@ export default function RoomPage({ roomDetails }) {
           </ReserveButton>
         )}
       </BoxContainer>
-    </SWRConfig>
+    </>
   );
 }
 
