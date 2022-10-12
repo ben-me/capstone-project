@@ -42,3 +42,22 @@ export async function getRoomById(roomId) {
     }),
   };
 }
+
+export async function deleteReservation(id) {
+  await dbConnect();
+  const rooms = await Room.find();
+  let roomToUpdate = null;
+  rooms.forEach((room) => {
+    room.desks = room.desks.map((desk) => {
+      desk.reservations = desk.reservations.filter((reservation) => {
+        if (reservation.id === id) {
+          roomToUpdate = room;
+          return false;
+        }
+        return true;
+      });
+      return desk;
+    });
+  });
+  roomToUpdate.save();
+}

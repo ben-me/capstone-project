@@ -1,8 +1,6 @@
-import dbConnect from '../../../dbConnect';
 import { getRoomById } from '../../../services/roomService';
 
 export default async function handler(request, response) {
-  await dbConnect();
   try {
     if (request.method === 'GET') {
       const { id } = request.query;
