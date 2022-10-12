@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import useSWR from 'swr';
 
 export default function DeskItem({
   deskDetails,
