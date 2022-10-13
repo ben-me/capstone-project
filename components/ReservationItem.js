@@ -10,13 +10,14 @@ export default function ReservationItem({
   let formattedDate = reservation.date.split('-').reverse();
   formattedDate = formattedDate.join('.');
 
-  async function deleteReservation(reservation) {
+  async function deleteReservation(deletedReservation) {
     await fetch(`/api/rooms/desks/reservations/${reservation.id}`, {
       method: 'DELETE',
     });
+
     onSetMyReservationList(
       myReservationList.filter(
-        (reservation) => reservation.id !== reservation.id
+        (reservation) => reservation.id !== deletedReservation.id
       )
     );
   }
