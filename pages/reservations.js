@@ -5,7 +5,7 @@ import getAllRooms from '../services/roomService';
 import ReservationItem from '../components/ReservationItem';
 import { useEffect, useState } from 'react';
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const rooms = await getAllRooms();
   return {
     props: {
