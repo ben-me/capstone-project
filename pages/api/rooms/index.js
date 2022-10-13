@@ -7,7 +7,7 @@ export default async function handler(request, response) {
       return response.status(200).json(rooms);
     }
   } catch (error) {
-    console.log('Could not get rooms');
     console.error(error);
+    return response.status(400).json({ message: 'Error trying to get rooms' });
   }
 }
