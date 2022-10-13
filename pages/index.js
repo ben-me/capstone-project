@@ -41,7 +41,7 @@ const Anchor = styled.a`
   background-color: #65b5ff;
   transition: 0.4s;
   text-decoration: none;
-  color: black;
+  color: white;
   text-align: center;
 `;
 
