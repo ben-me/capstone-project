@@ -11,15 +11,19 @@ export default function ReservationItem({
   formattedDate = formattedDate.join('.');
 
   async function deleteReservation(deletedReservation) {
-    await fetch(`/api/rooms/desks/reservations/${reservation.id}`, {
-      method: 'DELETE',
-    });
-
-    onSetMyReservationList(
-      myReservationList.filter(
-        (reservation) => reservation.id !== deletedReservation.id
-      )
+    const response = await fetch(
+      `/api/rooms/desks/reservations/${deletedReservation.id}`,
+      {
+        method: 'DELETE',
+      }
     );
+    if (response.status === 200) {
+      onSetMyReservationList(
+        myReservationList.filter(
+          (reservation) => reservation.id !== deletedReservation.id
+        )
+      );
+    }
   }
 
   return (

@@ -59,5 +59,5 @@ export async function deleteReservation(id) {
       return desk;
     });
   });
-  roomToUpdate.save();
+  return await roomToUpdate.save();
 }
