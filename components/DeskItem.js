@@ -5,7 +5,7 @@ export default function DeskItem({
   onShowDetails,
   currentHighlightedDesk,
 }) {
-  const active = currentHighlightedDesk === deskDetails.id;
+  const active = currentHighlightedDesk === deskDetails.name;
 
   return (
     <Desk active={active}>

@@ -1,11 +1,11 @@
 import RoomItem from '../components/RoomItem';
-import { getAllRooms } from '../services/roomService';
+import getAllRooms from '../services/roomService';
 import styled from 'styled-components';
 import BackButton from '../components/BackButton';
 import Header from '../components/Header';
 import BurgerMenu from '../components/BurgerMenu';
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const rooms = await getAllRooms();
   return {
     props: {
@@ -19,7 +19,7 @@ export default function Rooms({ rooms }) {
     <>
       <BurgerMenu />
       <BackButton page={'/'} />
-      <Header title={'All Rooms'} />
+      <Header title={'All rooms'} />
       <RoomList>
         {rooms.map((room) => {
           return <RoomItem key={room.id} roomData={room} />;

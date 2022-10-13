@@ -41,8 +41,8 @@ export default function DeskInfoBox({
 
 const Infobox = styled.ul`
   width: 100%;
+  margin: 0;
   padding-left: 1.25rem;
-  padding-bottom: 0.3rem;
   border: 1px solid black;
   border-radius: 7px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -60,6 +60,6 @@ const CloseButton = styled.button`
   border: none;
   width: 1.25rem;
   height: 1.25rem;
-  top: 1rem;
+  top: 0.2rem;
   right: 0.5rem;
 `;
