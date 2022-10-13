@@ -8,7 +8,6 @@ export default async function handler(request, response) {
       return response.status(200).json(room);
     }
   } catch (error) {
-    console.log('Could not find room');
     console.error(error);
     return response.status(404).json({ message: 'Room not found' });
   }

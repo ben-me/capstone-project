@@ -8,6 +8,7 @@ export default async function handler(request, response) {
       return response.status(200).json({ message: 'Reservation deleted' });
     }
   } catch (error) {
-    return response.status(400).json({ error });
+    console.error(error);
+    return response.status(404).json({ message: "Can't delete" });
   }
 }
