@@ -8,10 +8,11 @@ You can easily plan ahead, know exactly when and where you will work on a given 
 
 Don't want to or can't work on a day on which you already reserverd a desk? No problem! Easily check and delete your reservations with a few simple clicks.
 
+Credits to [Olena Sergienko](https://unsplash.com/@olenkasergienk) from unsplash for the office picture on my landing page.
+
 ---
 
-## Technology
-
+## Tech
 The App is developed in JSX with the [nextJS](https://nextjs.org/) Framework.<br>Deployment is done with [Vercell](https://vercel.com/).
 
 
