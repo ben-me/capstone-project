@@ -1,9 +1,7 @@
-
-
 # DeskShare
 
+<img src="https://user-images.githubusercontent.com/109357901/196393876-7083def7-c185-4048-9c59-613404bd6834.gif" align="right" alt="" width="220px" height="400px" style="margin-left: 16px;"/>
 
-<img src="https://user-images.githubusercontent.com/109357901/196393876-7083def7-c185-4048-9c59-613404bd6834.gif" align="right" alt="" width="220" height="400px"/>
 You are an employee working in a shared desk/co-working office space and want to plan upcoming days in the office?
 
 DeskShare helps you pick a room, check the availability of the desks and allows you to book a reservation.
