@@ -46,7 +46,6 @@ export default function RoomPage({ roomDetails }) {
 
   function changeDate(date) {
     setSelectedDate(date);
-    removeHighlight();
   }
 
   useEffect(() => {
