@@ -27,7 +27,6 @@ Credits to [Olena Sergienko](https://unsplash.com/@olenkasergienko) from unsplas
 - [Mongoose](https://mongoosejs.com/)
 - [Figma](https://www.figma.com/)
 
----
 
 ## Project Setup
 
