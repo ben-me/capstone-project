@@ -1,5 +1,9 @@
+
+
 # DeskShare
 
+
+<img src="https://user-images.githubusercontent.com/109357901/196393876-7083def7-c185-4048-9c59-613404bd6834.gif" align="right" alt="" width="250" height="400px"/>
 You are an employee working in a shared desk/co-working office space and want to plan upcoming days in the office?
 
 DeskShare helps you pick a room, check the availability of the desks and allows you to book a reservation.
@@ -8,14 +12,20 @@ You can easily plan ahead, know exactly when and where you will work on a given 
 
 Don't want to or can't work on a day on which you already reserverd a desk? No problem! Easily check and delete your reservations with a few simple clicks.
 
-Credits to [Olena Sergienko](https://unsplash.com/@olenkasergienko) from unsplash for the office picture on my landing page.
 
----
+Credits to [Olena Sergienko](https://unsplash.com/@olenkasergienko) from unsplash for the office picture on my landing page.
+ 
+***Important: This app is optimized for mobile usage, so please switch your browser to responsive mode!*** 
+
+<br>
 
 ## Tech
-The App is developed in JSX with the [nextJS](https://nextjs.org/) Framework.<br>Deployment is done with [Vercell](https://vercel.com/).
-
-
+- [JSX/React mit nextJS](https://nextjs.org/)
+- [Vercell](https://vercel.com/).
+- [Styled components](https://styled-components.com/)
+- [MongoDB](https://www.mongodb.com/)
+- [Mongoose](https://mongoosejs.com/)
+- [Figma](https://www.figma.com/)
 
 ---
 
