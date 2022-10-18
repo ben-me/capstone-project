@@ -3,7 +3,7 @@ import Room from '../models/Room';
 
 export default async function getAllRooms() {
   await dbConnect();
-  const rooms = await Room.find();
+  const rooms = await Room.find().sort({ _id: 1 });
   const roomArray = rooms.map(({ id, name, desks }) => {
     return {
       id,
