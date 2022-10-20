@@ -18,9 +18,9 @@ Credits to [Olena Sergienko](https://unsplash.com/@olenkasergienko) from unsplas
 <br>
 
 ## Tech
-- [JSX/React mit nextJS](https://nextjs.org/)
-- [Vercell](https://vercel.com/).
-- [Styled components](https://styled-components.com/)
+- [JSX/React/nextJS](https://nextjs.org/)
+- [Vercel](https://vercel.com/)
+- [Styled Components](https://styled-components.com/)
 - [MongoDB](https://www.mongodb.com/)
 - [Mongoose](https://mongoosejs.com/)
 - [Figma](https://www.figma.com/)
