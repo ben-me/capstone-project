@@ -1,5 +1,4 @@
 import RoomItem from './RoomItem';
-import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'Component/RoomItem',
