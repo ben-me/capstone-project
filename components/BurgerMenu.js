@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import BurgerIcon from '../public/burgermenu.png';
-import Image from 'next/future/image';
+import Image from "next/image";
 
 export default function BurgerMenu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

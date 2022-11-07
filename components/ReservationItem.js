@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Trash from '../public/trash.svg';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 
 export default function ReservationItem({
   reservation,
