@@ -1,8 +1,19 @@
+import { signIn } from 'next-auth/react';
 import styled from 'styled-components';
 import Background from '../components/Background';
 
 export default function Login() {
-  function handleSubmit() {}
+  function handleSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
+    const formName = form.user.value;
+    const formPassword = form.password.value;
+    signIn('credentials', {
+      callbackUrl: '/',
+      username: formName,
+      password: formPassword,
+    });
+  }
 
   return (
     <>
