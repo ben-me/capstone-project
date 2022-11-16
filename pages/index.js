@@ -1,20 +1,13 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import styled from 'styled-components';
-import Office from '../public/office.jpg';
+import Background from '../components/Background';
 import BurgerMenu from '../components/BurgerMenu';
 
 export default function Home() {
   return (
     <Container>
       <BurgerMenu />
-      <Image
-        src={Office}
-        alt="background"
-        layout="fill"
-        priority
-        objectFit="cover"
-      />
+      <Background />
       <Link href="/rooms" passHref>
         <Anchor>Show all rooms</Anchor>
       </Link>

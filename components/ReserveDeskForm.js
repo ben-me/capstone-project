@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { useSWRConfig } from 'swr';
+import { useSession } from 'next-auth/react';
 
 export default function ReserveDeskForm({
   selectedRoomId,
@@ -10,6 +11,7 @@ export default function ReserveDeskForm({
   selectedDate,
 }) {
   const { mutate } = useSWRConfig();
+  const { data: session } = useSession();
 
   function handleClick(event) {
     event.preventDefault();
@@ -40,7 +42,7 @@ export default function ReserveDeskForm({
       starttime: inputStartTime,
       endtime: inputEndTime,
       date: selectedDate.toISOString().substring(0, 10),
-      user: 'user1',
+      user: session.user.name,
       isPrivate: privateReservation,
       roomID: selectedRoomId,
       deskname: selectedDesk.name,
