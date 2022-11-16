@@ -28,5 +28,21 @@ export const authOptions = {
     signIn: '/login',
     error: '/login',
   },
+  callbacks: {
+    async jwt({ token, account, profile }) {
+      if (account) {
+        token.accessToken = account.access_token;
+      }
+      return token;
+    },
+    callbacks: {
+      async session({ session, token, user }) {
+        session.accessToken = token.accessToken;
+        session.user.id = token.id;
+        session.user.name = token.name;
+        return session;
+      },
+    },
+  },
 };
 export default NextAuth(authOptions);
