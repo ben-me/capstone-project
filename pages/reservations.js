@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import getAllRooms from '../services/roomService';
 import ReservationItem from '../components/ReservationItem';
 import { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
 
 export async function getServerSideProps() {
   const rooms = await getAllRooms();
@@ -16,6 +17,7 @@ export async function getServerSideProps() {
 
 export default function Reservations({ rooms }) {
   const [myReservationList, setMyReservationList] = useState([]);
+  const { data: session } = useSession();
 
   useEffect(() => {
     const date = new Date().toISOString().substring(0, 10);
@@ -25,7 +27,7 @@ export default function Reservations({ rooms }) {
         desk.reservations.map((reservation) => {
           const today = Date.parse(date);
           const resDate = Date.parse(reservation.date);
-          if (reservation.user === 'user1' && resDate >= today) {
+          if (reservation.user === session.user.name && resDate >= today) {
             reservation.room = room.name;
             reservation.desk = desk.name;
             userReservations.push(reservation);
