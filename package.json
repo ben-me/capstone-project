@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "babel-plugin-styled-components": "^2.0.7",
+    "bcryptjs": "^2.4.3",
     "mongoose": "^6.6.5",
     "next": "^12.3.2",
     "next-auth": "^4.15.1",
