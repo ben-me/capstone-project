@@ -1,4 +1,5 @@
 import { signIn } from 'next-auth/react';
+import Link from 'next/link';
 import styled from 'styled-components';
 import Background from '../components/Background';
 
@@ -39,7 +40,9 @@ export default function Login() {
             />
           </InputDiv>
           <ButtonDiv>
-            <StyledButton>Register</StyledButton>
+            <Link href={'/register'}>
+              <StyledLink>Register</StyledLink>
+            </Link>
             <StyledButton type="submit">Log In</StyledButton>
           </ButtonDiv>
         </LoginForm>
@@ -99,6 +102,17 @@ const StyledButton = styled.button`
   border-radius: 0.5rem;
   border: 1px rgba(101, 181, 255, 1) solid;
   padding: 0.4rem 2rem;
+  border: 1px solid var(--primary);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: var(--primary);
+  color: white;
+  font-size: large;
+`;
+
+const StyledLink = styled.a`
+  border-radius: 0.5rem;
+  border: 1px rgba(101, 181, 255, 1) solid;
+  padding: 0.4rem 1.5rem;
   border: 1px solid var(--primary);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   background-color: var(--primary);
