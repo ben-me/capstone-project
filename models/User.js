@@ -13,16 +13,23 @@ const User = mongoose.models.User || mongoose.model('User', userSchema);
 export default User;
 
 userSchema.pre('save', async function () {
-  await bcrypt.genSalt(10, function (error, salt) {
-    if (error) {
-      console.log(error);
-    } else {
-      bcrypt.hash(this.password, salt, function (err, hash) {
-        if (err) {
-          console.log(err);
-        }
-        saveUser(hash);
-      });
-    }
-  });
+  const user = this;
+
+  if (this.isModified('password') || this.isNew) {
+    bcrypt.genSalt(10, function (error, salt) {
+      if (error) {
+        return next(error);
+      } else {
+        bcrypt.hash(user.password, salt, function (hashError, hash) {
+          if (hashError) {
+            return next(hashError);
+          }
+          user.password = hash;
+          next();
+        });
+      }
+    });
+  } else {
+    return next();
+  }
 });
