@@ -10,6 +10,7 @@ export default function Login() {
     const formName = form.user.value;
     const formPassword = form.password.value;
     signIn('credentials', {
+      redirect: false,
       callbackUrl: '/',
       username: formName,
       password: formPassword,
@@ -21,6 +22,7 @@ export default function Login() {
       <Background />
       <StyledDiv>
         <LoginForm onSubmit={handleSubmit}>
+          <StyledTitle>Login with user</StyledTitle>
           <InputDiv>
             <StyledLabel htmlFor="user">Username: </StyledLabel>
             <StyledInput
@@ -71,6 +73,11 @@ const LoginForm = styled.form`
   background-color: white;
 `;
 
+const StyledTitle = styled.h3`
+  margin: 0 0 0.5rem 0;
+  text-align: center;
+`;
+
 const InputDiv = styled.div`
   display: grid;
   gap: 0.5rem;
@@ -99,6 +106,7 @@ const ButtonDiv = styled.div`
 `;
 
 const StyledButton = styled.button`
+  cursor: pointer;
   border-radius: 0.5rem;
   border: 1px rgba(101, 181, 255, 1) solid;
   padding: 0.4rem 2rem;
@@ -110,6 +118,7 @@ const StyledButton = styled.button`
 `;
 
 const StyledLink = styled.a`
+  cursor: pointer;
   border-radius: 0.5rem;
   border: 1px rgba(101, 181, 255, 1) solid;
   padding: 0.4rem 1.5rem;
