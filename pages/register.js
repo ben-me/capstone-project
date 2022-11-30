@@ -1,53 +1,75 @@
-import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import Background from '../components/Background';
 
-export default function Login() {
-  function handleSubmit(event) {
+export default function register() {
+  async function handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
-    const formName = form.user.value;
-    const formPassword = form.password.value;
-    signIn('credentials', {
-      redirect: false,
-      callbackUrl: '/',
-      username: formName,
-      password: formPassword,
-    });
+    const userInput = form.user.value;
+    const passwordInput = form.password.value;
+    const emailInput = form.email.value;
+
+    const newUser = {
+      name: userInput,
+      password: passwordInput,
+      email: emailInput,
+    };
+
+    await fetch('/api/users/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newUser),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message === 'Creation failed') {
+        }
+      });
+    form.reset();
   }
 
   return (
     <>
       <Background />
       <StyledDiv>
-        <LoginForm onSubmit={handleSubmit}>
-          <StyledTitle>Login with user</StyledTitle>
+        <RegisterForm onSubmit={handleSubmit}>
+          <StyledTitle>Register a new user</StyledTitle>
           <InputDiv>
-            <StyledLabel htmlFor="user">Username: </StyledLabel>
+            <StyledLabel htmlFor="user">Username:</StyledLabel>
             <StyledInput
-              type="text"
               name="user"
-              placeholder="Your username"
+              type="text"
+              placeholder="Username"
               maxLength={16}
               minLength={4}
             />
-            <StyledLabel htmlFor="password">Password: </StyledLabel>
+            <StyledLabel htmlFor="password">Password:</StyledLabel>
             <StyledInput
-              type="password"
               name="password"
-              placeholder="Your password"
-              maxlength={24}
-              minLength={6}
+              type="password"
+              placeholder="Password"
+              maxLength={16}
+              minLength={4}
+            />
+            <StyledLabel htmlFor="email">E-Mail:</StyledLabel>
+            <StyledInput
+              name="email"
+              type="email"
+              placeholder="yourMail@mail.com"
+              maxLength={16}
+              minLength={4}
             />
           </InputDiv>
           <ButtonDiv>
-            <Link href={'/register'}>
-              <StyledLink>Register</StyledLink>
+            <Link href={'/login'}>
+              <StyledLink>Cancel</StyledLink>
             </Link>
-            <StyledButton type="submit">Log In</StyledButton>
+            <StyledButton type="submit">Sign up</StyledButton>
           </ButtonDiv>
-        </LoginForm>
+        </RegisterForm>
       </StyledDiv>
     </>
   );
@@ -59,7 +81,7 @@ const StyledDiv = styled.div`
   min-width: 100vw;
 `;
 
-const LoginForm = styled.form`
+const RegisterForm = styled.form`
   position: absolute;
   max-width: 19.375rem;
   margin: 0 auto;
